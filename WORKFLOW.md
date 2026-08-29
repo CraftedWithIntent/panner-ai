@@ -196,6 +196,36 @@ I verify gates from each workspace's CI/CD config, not hardcoded here.
 - Labels: Auto-added from issue
 - Ready for immediate review (no drafts)
 
+**Assay-Specific PR Format:**
+
+*Title Format:*
+```
+M{X}.{Y}: Issue title
+```
+Example: `M1.1: Config Parser` or `M1.3: Deterministic Evaluators`
+
+*Body Template:*
+```markdown
+## Description
+Brief summary of changes and purpose.
+
+## Changes
+- Changed file1.py (what and why)
+- Added tests for feature X
+- Updated architecture docs
+
+## Testing
+- test_feature.py: X test cases passing
+- Coverage: XX%
+- Benchmarks: (if applicable)
+
+## Related Issue
+Closes #N
+
+## Notes
+Any additional context or Phase 1 limitations.
+```
+
 ### State Transitions
 
 ```
