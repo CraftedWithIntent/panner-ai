@@ -2,26 +2,353 @@
 
 > Precision testing tool for AI agents: semantic purity & behavioral integrity verification
 
-**Assay** is the regression testing framework for AI. AI agents and LLM-powered applications are inherently non-deterministic. Traditional testing tools cannot evaluate semantic alignment, fuzzy constraints, or probabilistic model behaviors across commits.
+A CraftedWithIntent Product
 
-**Assay bridges the gap.**
+---
 
-## Features
+## The Heritage & Core Vision
 
-- ✅ **Deterministic Assertions:** Regex patterns, HTTP status codes, latency thresholds, JSON schema validation
-- ✅ **LLM-as-a-Judge:** Score semantic alignment with Claude, GPT-4, or local LLMs
-- ✅ **Baseline Tracking:** Detect regressions across commits
-- ✅ **Multi-Format Reporting:** Rich CLI, JUnit XML, PR comments
-- ✅ **Model Agnostic:** Works with any HTTP-accessible AI agent
+**Assay** bridges the 1848 California Gold Rush "picks and shovels" heritage with high-craft engineering. In mining, an assay is the precise compositional analysis used to determine the exact purity and grade of ore. In AI development, **Assay** is the precision tool that verifies the semantic purity and behavioral integrity of AI agents before they reach production.
 
-## Quick Start
+---
 
+## Why Assay? (The Problem & Business Justification)
+
+### The Core Pain
+
+AI agents and LLM-powered applications are inherently non-deterministic. A prompt adjustment, system instruction tweak, or upstream model update can fix one edge case while silently breaking five others.
+
+### The Challenge
+
+Application builders cannot ship reliably to production without automated regression suites. Traditional testing tools (pytest, Jest) are built for binary assertions and cannot evaluate:
+- Semantic alignment
+- Fuzzy constraints
+- Probabilistic model behaviors
+- Complex agent workflows across commits
+
+### The Opportunity
+
+Assay fills this gap by providing an open-source, developer-first testing framework that speaks the language of AI—declarative test suites, LLM-as-a-judge evaluation, and deterministic baselines for regression tracking.
+
+---
+
+## What is Assay? (Product Scope)
+
+### Core Capabilities
+
+**Open-Source CLI & Python Library**
+- Standalone `assay` command-line tool
+- Importable Python library for programmatic test harnesses
+- GitHub Action for CI/CD integration
+- Docker container for polyglot CI runners
+
+**Test Execution Engine**
+- Asynchronous HTTP dispatch to AI agent endpoints
+- Configurable concurrency and timeout management
+- Environment variable hydration for secret injection
+- Request/response lifecycle instrumentation
+
+**Evaluation Strategies**
+- **Deterministic Assertions:** Regex patterns, HTTP status codes, latency thresholds, JSON schema validation
+- **LLM-as-a-Judge:** Score semantic alignment and behavioral correctness using structured JSON output from Claude, GPT-4, or open-source models
+- **Higher-Order Reduction:** Weighted score aggregation across multiple assertions
+
+**Baseline & Regression Tracking**
+- Snapshot test performance (baseline.json) in git
+- Delta computation against historical runs
+- Configurable regression thresholds (pass/fail gates)
+
+**Rich Reporting**
+- Terminal UI with ANSI colors and progress indicators
+- JUnit XML output for CI platform integration
+- GitHub PR comments with branch comparison diffs
+- JSON telemetry export for Assay Cloud sync
+
+**Multi-Format Delivery**
+- PyPI package (`assay-cli`)
+- GitHub Actions Marketplace (`craftedwithintent/assay-action`)
+- Docker container (GHCR: `ghcr.io/craftedwithintent/assay`)
+- Homebrew formula (planned Phase 2)
+
+---
+
+## Who Uses Assay? (Target Personas & Customer Segments)
+
+### Primary Personas
+
+**AI Engineers & LLM App Developers**
+- Use the free open-source CLI locally and in CI to catch prompt regressions pre-merge
+- Define test suites in YAML, commit baselines to git
+- Fast feedback loop during development
+
+**Engineering Managers & Tech Leads**
+- Enforce regression testing as a quality gate in PR workflows
+- Ensure no silent behavioral regressions slip into production
+- Build institutional confidence in AI agent reliability
+
+**Compliance Officers & Security Teams**
+- Need audit evidence that AI systems behave predictably
+- Require red-teaming and adversarial test packs
+- Must demonstrate due diligence to regulators and stakeholders
+
+---
+
+## Where Can Assay Run? (Deployment & Execution Environments)
+
+### Local Developer Workstations
+```bash
+assay run --config suite.yaml
+```
+Rapid iteration during prompt engineering, agent design, or tool adjustments.
+
+### CI/CD Pipelines
+**GitHub Actions:**
+```yaml
+- uses: craftedwithintent/assay-action@v1
+  with:
+    config: suite.yaml
+```
+
+**Generic CI (GitLab CI, CircleCI, Kubernetes):**
 ```bash
 pip install assay-cli
 assay run --config suite.yaml
 ```
 
+### Containerized Environments
+```bash
+docker run -v $PWD:/app ghcr.io/craftedwithintent/assay:latest run -c suite.yaml
+```
+
+### Assay Cloud (Managed SaaS — Future)
+- Centralized dashboard receiving encrypted telemetry
+- Cross-branch performance comparison
+- Historical trend analysis
+- Collaborative prompt curation interface
+
+### Enterprise Private Clouds (Future)
+- Air-gapped VPC / on-prem deployment
+- SAML SSO and RBAC for multi-team governance
+- Automated compliance report generation (EU AI Act, SOC2)
+- Turnkey domain compliance test packs
+
+---
+
+## When Do You Test? (Lifecycle Triggers)
+
+### Pre-Commit / Local Dev
+```bash
+assay run --config suite.yaml
+```
+Rapid local runs against changed prompts, system instructions, or tool definitions.
+
+### Pull Request / CI Stage
+Full suite execution comparing target branch performance against `main` (baseline). Non-zero exit codes block merge if regressions exceed threshold.
+
+### Scheduled Nightly / Model Drift Checks
+Automated synthetic testing detecting third-party foundation model version changes. Alert teams if upstream provider behavior shifts.
+
+### Production Incident Ingestion (Assay Cloud)
+Convert real-world user failures into permanent regression test cases. Prevent the same failure from reaching production twice.
+
+---
+
+## How Does Assay Work? (Technical Execution & Core Mechanisms)
+
+### Architecture: Functional Core + Imperative Shell
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  User Interface Layer                                          │
+│  ┌─────────────────────┐  ┌──────────────────────────────┐   │
+│  │ CLI (typer)         │  │ Python Programmatic API      │   │
+│  └────────────┬────────┘  └──────────────┬───────────────┘   │
+└───────────────┼──────────────────────────┼──────────────────┘
+                │                          │
+┌───────────────┴──────────────────────────┴──────────────────┐
+│ Imperative Shell (I/O, Adapters, Transport)                  │
+│                                                                │
+│  ┌────────────────────────┐  ┌─────────────────────────────┐ │
+│  │ Config Parser          │  │ Async HTTP Agent Transport  │ │
+│  │ (PyYAML/Pydantic)      │  │ (httpx with concurrency)    │ │
+│  └────────────────────────┘  └─────────────────────────────┘ │
+│                                                                │
+│  ┌────────────────────────┐  ┌─────────────────────────────┐ │
+│  │ Baseline Storage       │  │ Multi-Target Reporters      │ │
+│  │ (baseline.json)        │  │ (CLI/JUnit/PR/Cloud)        │ │
+│  └────────────────────────┘  └─────────────────────────────┘ │
+└───────────────┬──────────────────────────────────────────────┘
+                │
+         [ Pure Data In ]
+                │
+┌───────────────┴──────────────────────────────────────────────┐
+│ Functional Core (Pure Domain Logic)                           │
+│                                                                │
+│  Immutable Types:                                             │
+│  ┌──────────────┐  ┌──────────────┐  ┌─────────────────┐    │
+│  │ AssertionSpec│  │AgentResponse │  │TestCaseReport   │    │
+│  └──────────────┘  └──────────────┘  └─────────────────┘    │
+│                                                                │
+│  Pure Evaluators (no side effects):                           │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │ Regex Match  │  │ Latency      │  │ Status Code  │       │
+│  │ JSON Schema  │  │ LLM Judge    │  │ Aggregation  │       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
+└───────────────┬──────────────────────────────────────────────┘
+                │
+        [ Pure Data Out ]
+                │
+┌───────────────┴──────────────────────────────────────────────┐
+│ Output (SuiteReport)                                           │
+│  - Test case results                                           │
+│  - Scores and deltas                                           │
+│  - Pass/fail status                                           │
+└───────────────────────────────────────────────────────────────┘
+```
+
+### Design Principles
+
+**Functional Core, Imperative Shell**
+- Pure, referentially transparent evaluation functions separate cleanly from asynchronous network I/O, file systems, and external services
+- Easier to test, reason about, and parallelize
+- No hidden side effects in domain logic
+
+**Model Agnosticism**
+- Abstract model routing layer (LiteLLM/Ollama) shields you from vendor lock-in
+- Support local, open-source, and proprietary frontier models as evaluators
+- Graceful fallback to deterministic assertions when LLM judge unavailable
+
+**Declarative Test Specifications**
+- YAML-first: human-readable, git-friendly, version-controlled
+- Compose test suites from simple building blocks
+- No code generation or DSLs—just data
+
+**Deterministic Execution**
+- Reproducible test runs across machines
+- Seeded randomness (when needed)
+- Clear audit trail of all decisions
+
+---
+
+## Delivery & Packaging (Multi-Channel Distribution)
+
+| Distribution Channel | Target Audience | Registry | Consumption Pattern |
+|---|---|---|---|
+| **1. GitHub Action** | GitHub CI/CD workflows | GitHub Marketplace | `uses: craftedwithintent/assay-action@v1` |
+| **2. Standalone CLI** | Local developers & general CI | PyPI (`assay-cli`) | `pip install assay-cli` → `assay run -c suite.yaml` |
+| **3. Python Library** | Custom programmatic harnesses | PyPI (`assay`) | `from assay.core import evaluate_test_case` |
+| **4. Docker Container** | Polyglot CI runners & air-gapped environments | GHCR | `docker run ghcr.io/craftedwithintent/assay:latest` |
+| **5. Homebrew** | macOS developers (Phase 2) | Homebrew Tap | `brew install assay` |
+
+---
+
+## MVP Product Scope & Phase 1 Roadmap (Weeks 1–3)
+
+### Phase 1: Open-Core MVP
+
+#### Execution Engine
+- [ ] Asynchronous HTTP dispatch with configurable concurrency
+- [ ] Request timeout management and graceful degradation
+- [ ] Environment variable hydration for credential injection
+- [ ] Lifecycle instrumentation (request start, response, error handling)
+
+#### Evaluation Suite
+- [ ] Deterministic assertions:
+  - Regex pattern matching against response body
+  - Latency threshold validation (ms)
+  - HTTP status code verification
+  - JSON schema structural validation (required keys)
+- [ ] LLM-as-a-Judge strategy:
+  - Structured JSON output parsing
+  - Confidence score extraction
+  - Fallback handling for parse failures
+
+#### Baseline Tracking & Regression Detection
+- [ ] Snapshot persistence (baseline.json in git)
+- [ ] Score delta computation (current vs. historical)
+- [ ] Configurable regression thresholds
+- [ ] Exit codes for CI quality gates (0=pass, 1=regression)
+
+#### Configuration Parser
+- [ ] YAML test suite deserialization (PyYAML)
+- [ ] Pydantic validation models
+- [ ] Environment variable interpolation
+- [ ] Detailed error messages for malformed configs
+
+#### Reporting & Quality Gates
+- [ ] Rich terminal output (ANSI colors, progress bars)
+- [ ] JUnit XML export for CI platform integration
+- [ ] JSON telemetry output (prepare for Assay Cloud sync)
+- [ ] POSIX exit codes for automation
+
+#### Delivery Artifacts
+- [ ] PyPI package (`assay-cli`) with console script entrypoint
+- [ ] Executable CLI binary (`assay`)
+- [ ] GitHub Action (action.yml) ready for Marketplace
+- [ ] Sample vertical test suites (finance, e-commerce, chatbot)
+- [ ] Comprehensive README and quick-start guide
+
+### Phase 2: Commercial Extensions & Cloud Enablement (Post-MVP Roadmap)
+
+- CLI cloud telemetry hook (`--sync`): Connect assay CLI runs to Assay Cloud
+- Trace ingestion adapters: Convert OpenTelemetry / Langfuse spans into YAML test cases
+- Compliance report generator: Automated PDF/Markdown for regulatory frameworks
+- Web dashboard: Visual regression diffs, multi-PR tracking, trend analysis
+- Managed judge compute: Zero API key management for evaluation
+- Production trace-to-test: 1-click import from logs into test suite
+
+---
+
+## Quick Start
+
+### Installation
+
+```bash
+pip install assay-cli
+```
+
+### Local Usage
+
+Create a test suite file (`suite.yaml`):
+
+```yaml
+suite: my-agent-tests
+agent_endpoint: http://localhost:8000/chat
+
+tests:
+  - name: simple-greeting
+    payload:
+      message: "Hello"
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: regex
+        pattern: '("greeting"|"hello")'
+      - type: latency
+        max_ms: 500
+
+  - name: structured-response
+    payload:
+      message: "List the top 3 fruits"
+    assertions:
+      - type: json_schema
+        schema:
+          required:
+            - items
+            - count
+      - type: latency
+        max_ms: 1000
+```
+
+Run the suite:
+
+```bash
+assay run --config suite.yaml
+```
+
 ### GitHub Actions
+
+Add to your workflow:
 
 ```yaml
 - uses: craftedwithintent/assay-action@v1
@@ -29,17 +356,57 @@ assay run --config suite.yaml
     config: suite.yaml
 ```
 
-## Product Tiers
+### Docker
 
-| Tier | Features | Cost |
-|------|----------|------|
-| **Community** | Open-source CLI, GitHub Action | Free |
-| **Assay Cloud** | Web dashboard, managed judge compute | $49–$199/mo |
-| **Enterprise** | Self-hosted, SAML/RBAC, compliance packs | $20k–$80k+ ACV |
+```bash
+docker run -v $PWD:/app ghcr.io/craftedwithintent/assay:latest run -c suite.yaml
+```
+
+---
+
+## Architecture & Design
+
+### Core Principles
+
+1. **Functional Purity:** Domain logic has zero side effects; I/O is isolated to the shell
+2. **Immutability:** All data structures are frozen; no hidden state mutations
+3. **Composability:** Evaluators are first-class; easy to add new assertion types
+4. **Determinism:** Reproducible test runs with seeded randomness
+5. **Auditability:** Complete trace of all decisions and scores
+
+### Key Design Decisions
+
+- **YAML over Python DSL:** Humans write tests, not code
+- **Model Agnosticism:** LiteLLM abstraction shields from vendor lock-in
+- **Baseline in Git:** Version control for test performance history
+- **Exit Codes Matter:** CI automation depends on clear pass/fail signals
+
+---
+
+## Features
+
+✅ **Deterministic Assertions:** Regex, latency, status codes, JSON schema  
+✅ **LLM-as-a-Judge:** Score semantic alignment with any model  
+✅ **Baseline Tracking:** Detect regressions across commits  
+✅ **Multi-Format Reporting:** CLI, JUnit XML, JSON telemetry  
+✅ **Model Agnostic:** Works with local, open-source, or proprietary LLMs  
+✅ **Pure Functional Design:** Easy to test, reason about, parallelize  
+✅ **Git-Friendly:** YAML configs and baselines version-controlled  
+✅ **CI/CD Ready:** GitHub Actions, Docker, generic CI runners  
+
+---
 
 ## License
 
-MIT License (open-source tier). Proprietary for commercial tiers.
+**Open-Source Tier:** MIT License
+
+See LICENSE file for details.
+
+---
+
+## Project Status
+
+**v0.1.0-dev** — Initial monorepo scaffold. Phase 1 implementation underway.
 
 ---
 
