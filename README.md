@@ -15,19 +15,19 @@ Testing AI agents is hard. Traditional test assertions (status codes, latency) c
 ### Install
 
 ```bash
-pip install assay
+pip install assay-ai
 ```
 
 ### Run a test suite
 
 ```bash
-assay run tests/suites/smoke.yaml --reporter terminal
+assay-ai run tests/suites/smoke.yaml --reporter terminal
 ```
 
 ### With baseline tracking (regression detection)
 
 ```bash
-assay run tests/suites/regression.yaml \
+assay-ai run tests/suites/regression.yaml \
   --reporter terminal,json \
   --output results.json \
   --baseline-file baseline.json
