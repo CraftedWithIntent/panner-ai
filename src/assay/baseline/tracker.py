@@ -2,13 +2,13 @@
 
 import json
 import subprocess
-from datetime import datetime
+import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
-try:
-    from datetime import UTC
-except ImportError:
-    from datetime import timezone
+if sys.version_info >= (3, 13):
+    from datetime import UTC  # type: ignore
+else:
     UTC = timezone.utc  # type: ignore
 
 
