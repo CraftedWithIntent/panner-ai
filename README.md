@@ -1,33 +1,33 @@
-# Assay
+# Panner AI
 
 **Precision testing tool for AI agents with baseline tracking and LLM-powered evaluation.**
 
-## What is Assay?
+## What is Panner AI?
 
-Assay is a test framework designed for AI systems that interact with APIs. It combines traditional HTTP testing (status codes, response times, JSON validation) with LLM-powered semantic correctness evaluation, baseline tracking, and multi-format reporting.
+Panner AI is a test framework designed for AI systems that interact with APIs. It combines traditional HTTP testing (status codes, response times, JSON validation) with LLM-powered semantic correctness evaluation, baseline tracking, and multi-format reporting.
 
 ### Problem
 
-Testing AI agents is hard. Traditional test assertions (status codes, latency) catch infrastructure failures. But they don't catch semantic regressions — when the agent's logic degrades subtly. Assay bridges this gap by treating LLM judges as first-class test evaluators.
+Testing AI agents is hard. Traditional test assertions (status codes, latency) catch infrastructure failures. But they don't catch semantic regressions — when the agent's logic degrades subtly. Panner AI bridges this gap by treating LLM judges as first-class test evaluators.
 
 ## Quick Start
 
 ### Install
 
 ```bash
-pip install assay-ai
+pip install panner-ai
 ```
 
 ### Run a test suite
 
 ```bash
-assay-ai run tests/suites/smoke.yaml --reporter terminal
+panner-ai run tests/suites/smoke.yaml --reporter terminal
 ```
 
 ### With baseline tracking (regression detection)
 
 ```bash
-assay-ai run tests/suites/regression.yaml \
+panner-ai run tests/suites/regression.yaml \
   --reporter terminal,json \
   --output results.json \
   --baseline-file baseline.json
@@ -135,7 +135,7 @@ test_cases:
 ## CLI Reference
 
 ```
-assay run [OPTIONS] SUITE
+panner-ai run [OPTIONS] SUITE
 
 Positional Arguments:
   SUITE                  Path to test suite YAML configuration file (default: suite.yaml)
@@ -149,9 +149,9 @@ Options:
   --help                         Show this message and exit
 
 Examples:
-  assay run suite.yaml
-  assay run tests/suites/smoke.yaml --reporter terminal,json --output results.json
-  assay run tests/suites/regression.yaml --baseline-file baseline.json --reporter junit
+  panner-ai run suite.yaml
+  panner-ai run tests/suites/smoke.yaml --reporter terminal,json --output results.json
+  panner-ai run tests/suites/regression.yaml --baseline-file baseline.json --reporter junit
 ```
 
 ## Configuration
@@ -230,7 +230,7 @@ When regression is detected:
 
 ## GitHub Actions Integration
 
-`.github/workflows/assay.yml` provides:
+`.github/workflows/panner-ai.yml` provides:
 
 - **Smoke tests** (2 fast checks, <1min) — gates regression tests
 - **Regression tests** (8 comprehensive tests, ~5min) — full suite

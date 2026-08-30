@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "assay-ai"
+name = "panner-ai"
 version = "0.1.0"
 description = "Precision testing tool for AI agents with baseline tracking and LLM evaluation"
 readme = "README.md"
@@ -53,7 +53,7 @@ dev = [
 ]
 
 [project.scripts]
-assay-ai = "assay.cli:app"
+panner-ai = "assay.cli:app"
 
 [tool.ruff]
 line-length = 100

@@ -1,6 +1,6 @@
-# Contributing to Assay
+# Contributing to Panner AI
 
-Thank you for contributing! This guide explains how to develop, test, and submit changes to Assay.
+Thank you for contributing! This guide explains how to develop, test, and submit changes to Panner AI.
 
 ## Setup
 
