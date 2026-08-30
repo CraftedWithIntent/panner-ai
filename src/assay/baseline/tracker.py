@@ -2,8 +2,14 @@
 
 import json
 import subprocess
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
+
+try:
+    from datetime import UTC
+except ImportError:
+    from datetime import timezone
+    UTC = timezone.utc  # type: ignore
 
 
 class BaselineTracker:
@@ -85,7 +91,7 @@ class BaselineTracker:
             current_scores: {test_name: {assertion_type: score}}
         """
         commit_sha = self._get_current_commit()
-        timestamp = datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z")
+        timestamp = datetime.now(tz=UTC).isoformat().replace("+00:00", "Z")
 
         for test_name, assertions in current_scores.items():
             if test_name not in self._baseline:
