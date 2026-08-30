@@ -4,7 +4,7 @@ import tempfile
 import pytest
 from pydantic import ValidationError
 
-from assay.config.parser import parse_suite, SuiteConfig
+from assay.config.parser import SuiteConfig, parse_suite
 from assay.domain.types import AssertionType
 
 
