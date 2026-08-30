@@ -3,9 +3,15 @@
 from typing import Any
 
 import yaml
-from pydantic import BaseModel, ValidationError, field_validator
+from pydantic import BaseModel, ValidationError as PydanticValidationError, field_validator
 
 from assay.domain.types import AssertionType
+
+
+class ConfigParseError(Exception):
+    """Custom exception for config parsing errors."""
+
+    pass
 
 
 class AssertionSpec(BaseModel):
@@ -76,14 +82,14 @@ def parse_suite(yaml_path: str) -> SuiteConfig:
         with open(yaml_path, "r") as f:
             data = yaml.safe_load(f)
     except FileNotFoundError:
-        raise FileNotFoundError(f"Config file not found: {yaml_path}")
+        raise FileNotFoundError(f"Config file not found: {yaml_path}") from None
     except yaml.YAMLError as e:
-        raise ValidationError(f"Invalid YAML: {e}")
+        raise ConfigParseError(f"Invalid YAML: {e}") from e
 
     if not isinstance(data, dict):
-        raise ValidationError("YAML root must be a dictionary")
+        raise ConfigParseError("YAML root must be a dictionary")
 
     try:
         return SuiteConfig(**data)
-    except ValidationError as e:
-        raise ValidationError(f"Config validation failed: {e}")
+    except PydanticValidationError as e:
+        raise ConfigParseError(f"Config validation failed: {e}") from e

@@ -2,9 +2,8 @@ import os
 import tempfile
 
 import pytest
-from pydantic import ValidationError
 
-from assay.config.parser import SuiteConfig, parse_suite
+from assay.config.parser import ConfigParseError, SuiteConfig, parse_suite
 from assay.domain.types import AssertionType
 
 
@@ -106,7 +105,7 @@ class TestParseValidation:
             f.write(yaml_str)
             temp_file = f.name
         try:
-            with pytest.raises(ValidationError):
+            with pytest.raises(ConfigParseError):
                 parse_suite(temp_file)
         finally:
             os.unlink(temp_file)
@@ -118,7 +117,7 @@ class TestParseValidation:
             f.write(yaml_str)
             temp_file = f.name
         try:
-            with pytest.raises(ValidationError):
+            with pytest.raises(ConfigParseError):
                 parse_suite(temp_file)
         finally:
             os.unlink(temp_file)
@@ -130,7 +129,7 @@ class TestParseValidation:
             f.write(yaml_str)
             temp_file = f.name
         try:
-            with pytest.raises(ValidationError):
+            with pytest.raises(ConfigParseError):
                 parse_suite(temp_file)
         finally:
             os.unlink(temp_file)
@@ -142,7 +141,7 @@ class TestParseValidation:
             f.write(yaml_str)
             temp_file = f.name
         try:
-            with pytest.raises(ValidationError):
+            with pytest.raises(ConfigParseError):
                 parse_suite(temp_file)
         finally:
             os.unlink(temp_file)
@@ -163,7 +162,7 @@ class TestParseFileHandling:
             f.write(yaml_str)
             temp_file = f.name
         try:
-            with pytest.raises(ValidationError):
+            with pytest.raises(ConfigParseError):
                 parse_suite(temp_file)
         finally:
             os.unlink(temp_file)
