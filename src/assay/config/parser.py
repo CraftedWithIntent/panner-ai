@@ -3,15 +3,14 @@
 from typing import Any
 
 import yaml
-from pydantic import BaseModel, ValidationError as PydanticValidationError, field_validator
+from pydantic import BaseModel, field_validator
+from pydantic import ValidationError as PydanticValidationError
 
 from assay.domain.types import AssertionType
 
 
 class ConfigParseError(Exception):
     """Custom exception for config parsing errors."""
-
-    pass
 
 
 class AssertionSpec(BaseModel):
