@@ -52,7 +52,8 @@ def run(
     # Parse suite config
     try:
         suite_config = parse_suite(config_path)
-    except Exception as e:\n        typer.echo(f"Error parsing config: {e}", err=True)
+    except Exception as e:
+        typer.echo(f"Error parsing config: {e}", err=True)
         raise typer.Exit(code=1)
 
     # Execute test suite
@@ -63,7 +64,8 @@ def run(
 
     try:
         suite_report = asyncio.run(executor.run())
-    except Exception as e:\n        typer.echo(f"Error executing suite: {e}", err=True)
+    except Exception as e:
+        typer.echo(f"Error executing suite: {e}", err=True)
         raise typer.Exit(code=1)
 
     # Parse reporter list
@@ -99,7 +101,8 @@ def run(
 
         try:
             reporter_instance.report(suite_report)
-        except Exception as e:\n            typer.echo(f"Error generating {reporter_name} report: {e}", err=True)
+        except Exception as e:
+            typer.echo(f"Error generating {reporter_name} report: {e}", err=True)
             raise typer.Exit(code=1)
 
     # Exit with appropriate code
