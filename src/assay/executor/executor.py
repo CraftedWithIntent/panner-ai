@@ -113,7 +113,7 @@ class TestExecutor:
                 json=test_spec.payload,
                 timeout=timeout_sec,
             )
-        except httpx.TimeoutError:
+        except httpx.TimeoutException:
             latency_ms = (time.time() - start_time) * 1000
             agent_response = AgentResponse(
                 status_code=0,

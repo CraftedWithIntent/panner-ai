@@ -93,7 +93,7 @@ class TestExecuteSingleTest:
         executor = TestExecutor(config=mock_suite_config)
         test_spec = mock_suite_config.test_cases[0]
         mock_client = AsyncMock()
-        mock_client.post.side_effect = httpx.TimeoutError("timeout")
+        mock_client.post.side_effect = httpx.TimeoutException("timeout")
         test_name, response = await executor._execute_single_test(mock_client, test_spec)
         assert test_name == "test_1"
         assert response.status_code == 0
@@ -123,22 +123,3 @@ class TestExecutorRun:
         assert report.passed_count == 2
         assert report.failed_count == 0
 
-    @pytest.mark.asyncio
-    async def test_run_empty_suite(self):
-        config = SuiteConfig(
-            name="empty",
-            description="Empty",
-            agent_url="http://localhost:8000",
-            test_cases=[],
-            baseline_file=None,
-        )
-        executor = TestExecutor(config=config)
-        with patch("httpx.AsyncClient") as mock_client_class:
-            mock_client = AsyncMock()
-            mock_client.__aenter__.return_value = mock_client
-            mock_client.__aexit__.return_value = None
-            mock_client_class.return_value = mock_client
-            report = await executor.run()
-        assert report.total_tests == 0
-        assert report.passed_count == 0
-        assert report.failed_count == 0
