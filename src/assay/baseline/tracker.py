@@ -85,7 +85,7 @@ class BaselineTracker:
             current_scores: {test_name: {assertion_type: score}}
         """
         commit_sha = self._get_current_commit()
-        timestamp = datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z")  # noqa: UP017
+        timestamp = datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z")
 
         for test_name, assertions in current_scores.items():
             if test_name not in self._baseline:
