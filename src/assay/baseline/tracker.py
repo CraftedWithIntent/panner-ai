@@ -1,4 +1,5 @@
 """Baseline tracking and regression detection infrastructure."""
+# ruff: noqa: DTZ003 (timezone.utc used intentionally for Python 3.11+ compatibility)
 
 import json
 import subprocess
