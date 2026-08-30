@@ -97,7 +97,11 @@ def evaluate_json_schema(assertion: AssertionSpec, response: AgentResponse) -> E
 
 
 def get_evaluator(assertion_type: AssertionType) -> Callable:
-    """Router: returns the appropriate pure evaluator function."""
+    """Router: returns the appropriate evaluator function.
+    
+    Note: LLM_JUDGE evaluator is async and requires special handling in pipeline.
+    See assay.evaluators.llm_judge for async variant.
+    """
     evaluators = {
         AssertionType.REGEX: evaluate_regex,
         AssertionType.LATENCY: evaluate_latency,
