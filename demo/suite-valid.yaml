@@ -1,0 +1,20 @@
+name: demo-suite
+description: "Demo test suite for parser validation"
+agent_url: http://localhost:8000/api/agent
+test_cases:
+  - name: "arithmetic query"
+    payload: {query: "What is 2+2?"}
+    assertions:
+      - type: regex
+        expected: "4"
+      - type: latency
+        expected: 100
+        tolerance: 50
+      - type: llm_judge
+        expected: "response demonstrates mathematical correctness"
+  - name: "json response"
+    payload: {format: "json"}
+    assertions:
+      - type: json_schema
+        expected: {type: "object", properties: {result: {type: "number"}}}
+baseline_file: baseline.json
