@@ -1,8 +1,10 @@
-import pytest
-import tempfile
 import os
+import tempfile
+
+import pytest
 from pydantic import ValidationError
-from assay.config.parser import parse_suite, SuiteConfig, TestCaseSpec, AssertionSpec
+
+from assay.config.parser import parse_suite, SuiteConfig
 from assay.domain.types import AssertionType
 
 
@@ -75,19 +77,22 @@ class TestParseValidYAML:
     def test_config_is_frozen(self, temp_yaml):
         """Verify SuiteConfig is immutable."""
         config = parse_suite(temp_yaml)
-        with pytest.raises(Exception):
+        import pytest as pytest_lib
+        with pytest_lib.raises(AttributeError):
             config.name = "modified"
 
     def test_test_case_is_frozen(self, temp_yaml):
         """Verify TestCaseSpec is immutable."""
         config = parse_suite(temp_yaml)
-        with pytest.raises(Exception):
+        import pytest as pytest_lib
+        with pytest_lib.raises(AttributeError):
             config.test_cases[0].name = "modified"
 
     def test_assertion_is_frozen(self, temp_yaml):
         """Verify AssertionSpec is immutable."""
         config = parse_suite(temp_yaml)
-        with pytest.raises(Exception):
+        import pytest as pytest_lib
+        with pytest_lib.raises(AttributeError):
             config.test_cases[0].assertions[0].type = AssertionType.STATUS_CODE
 
 

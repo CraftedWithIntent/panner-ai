@@ -1,15 +1,19 @@
 """YAML config parser for Assay test suites."""
-from typing import Any, Dict, List, Optional
+
+from typing import Any
+
 import yaml
 from pydantic import BaseModel, ValidationError, field_validator
+
 from assay.domain.types import AssertionType
 
 
 class AssertionSpec(BaseModel):
     """Assertion specification (frozen)."""
+
     type: AssertionType
     expected: Any
-    tolerance: Optional[float] = None
+    tolerance: float | None = None
     weight: float = 1.0
 
     model_config = {"frozen": True}
@@ -24,9 +28,10 @@ class AssertionSpec(BaseModel):
 
 class TestCaseSpec(BaseModel):
     """Test case specification (frozen)."""
+
     name: str
-    payload: Dict[str, Any]
-    assertions: List[AssertionSpec]
+    payload: dict[str, Any]
+    assertions: list[AssertionSpec]
     timeout_ms: int = 5000
 
     model_config = {"frozen": True}
@@ -41,11 +46,12 @@ class TestCaseSpec(BaseModel):
 
 class SuiteConfig(BaseModel):
     """Test suite configuration (frozen)."""
+
     name: str
     description: str
     agent_url: str
-    test_cases: List[TestCaseSpec]
-    baseline_file: Optional[str] = "baseline.json"
+    test_cases: list[TestCaseSpec]
+    baseline_file: str | None = "baseline.json"
 
     model_config = {"frozen": True}
 
@@ -58,7 +64,7 @@ class SuiteConfig(BaseModel):
 
     @field_validator("test_cases")
     @classmethod
-    def validate_test_cases(cls, v: List[TestCaseSpec]) -> List[TestCaseSpec]:
+    def validate_test_cases(cls, v: list[TestCaseSpec]) -> list[TestCaseSpec]:
         if not v:
             raise ValueError("test_cases must not be empty")
         return v

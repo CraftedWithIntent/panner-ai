@@ -1,12 +1,13 @@
 """Pure functional evaluators - MVP version (exception handlers added in Phase 1)."""
 
-import re
 import json
-from typing import Callable
+import re
+from collections.abc import Callable
+
 from assay.domain.types import (
+    AgentResponse,
     AssertionSpec,
     AssertionType,
-    AgentResponse,
     EvaluationResult,
 )
 

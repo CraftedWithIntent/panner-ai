@@ -1,12 +1,12 @@
 """Pure pipeline reducer: orchestrates evaluators without I/O."""
 
-from assay.domain.types import (
-    AssertionSpec,
-    AgentResponse,
-    TestCaseReport,
-    SuiteReport,
-)
 from assay.core.evaluators import get_evaluator
+from assay.domain.types import (
+    AgentResponse,
+    AssertionSpec,
+    SuiteReport,
+    TestCaseReport,
+)
 
 
 def evaluate_test_case(
