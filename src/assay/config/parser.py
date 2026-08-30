@@ -1,12 +1,13 @@
 """YAML config parser for Assay test suites."""
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Dict, List, Optional
 import yaml
 from pydantic import BaseModel, ValidationError, field_validator
+from assay.domain.types import AssertionType
 
 
 class AssertionSpec(BaseModel):
     """Assertion specification (frozen)."""
-    type: Literal["regex", "status_code", "latency", "json_schema", "llm_judge"]
+    type: AssertionType
     expected: Any
     tolerance: Optional[float] = None
     weight: float = 1.0
@@ -58,20 +59,25 @@ class SuiteConfig(BaseModel):
     @field_validator("test_cases")
     @classmethod
     def validate_test_cases(cls, v: List[TestCaseSpec]) -> List[TestCaseSpec]:
-        if not v:\n            raise ValueError("test_cases must not be empty")
+        if not v:
+            raise ValueError("test_cases must not be empty")
         return v
 
 
 def parse_suite(yaml_path: str) -> SuiteConfig:
     """Parse YAML test suite file into immutable SuiteConfig."""
     try:
-        with open(yaml_path, "r") as f:\n            data = yaml.safe_load(f)\n    except FileNotFoundError:
+        with open(yaml_path, "r") as f:
+            data = yaml.safe_load(f)
+    except FileNotFoundError:
         raise FileNotFoundError(f"Config file not found: {yaml_path}")
-    except yaml.YAMLError as e:\n        raise ValidationError(f"Invalid YAML: {e}")
+    except yaml.YAMLError as e:
+        raise ValidationError(f"Invalid YAML: {e}")
 
     if not isinstance(data, dict):
         raise ValidationError("YAML root must be a dictionary")
 
     try:
         return SuiteConfig(**data)
-    except ValidationError as e:\n        raise ValidationError(f"Config validation failed: {e}")
+    except ValidationError as e:
+        raise ValidationError(f"Config validation failed: {e}")
