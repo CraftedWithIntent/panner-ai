@@ -2,14 +2,8 @@
 
 import json
 import subprocess
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
-
-if sys.version_info >= (3, 13):
-    from datetime import UTC  # type: ignore
-else:
-    UTC = timezone.utc  # type: ignore
 
 
 class BaselineTracker:
@@ -91,7 +85,7 @@ class BaselineTracker:
             current_scores: {test_name: {assertion_type: score}}
         """
         commit_sha = self._get_current_commit()
-        timestamp = datetime.now(tz=UTC).isoformat().replace("+00:00", "Z")
+        timestamp = datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z")  # noqa: UP017
 
         for test_name, assertions in current_scores.items():
             if test_name not in self._baseline:
