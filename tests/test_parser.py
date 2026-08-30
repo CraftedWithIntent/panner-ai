@@ -2,6 +2,7 @@ import os
 import tempfile
 
 import pytest
+from pydantic import ValidationError as PydanticValidationError
 
 from assay.config.parser import ConfigParseError, SuiteConfig, parse_suite
 from assay.domain.types import AssertionType
@@ -79,21 +80,21 @@ class TestParseValidYAML:
         """Verify SuiteConfig is immutable."""
         config = parse_suite(temp_yaml)
         import pytest as pytest_lib
-        with pytest_lib.raises(AttributeError):
+        with pytest_lib.raises(PydanticValidationError):
             config.name = "modified"
 
     def test_test_case_is_frozen(self, temp_yaml):
         """Verify TestCaseSpec is immutable."""
         config = parse_suite(temp_yaml)
         import pytest as pytest_lib
-        with pytest_lib.raises(AttributeError):
+        with pytest_lib.raises(PydanticValidationError):
             config.test_cases[0].name = "modified"
 
     def test_assertion_is_frozen(self, temp_yaml):
         """Verify AssertionSpec is immutable."""
         config = parse_suite(temp_yaml)
         import pytest as pytest_lib
-        with pytest_lib.raises(AttributeError):
+        with pytest_lib.raises(PydanticValidationError):
             config.test_cases[0].assertions[0].type = AssertionType.STATUS_CODE
 
 
