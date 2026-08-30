@@ -3,7 +3,7 @@
 import json
 
 from assay.executor.executor import SuiteReport
-from assay.reporters.base import Reporter, ReporterConfig
+from assay.reporters.base import Reporter
 
 
 class JSONReporter(Reporter):
