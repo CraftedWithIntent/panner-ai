@@ -18,10 +18,8 @@ app = typer.Typer(
 
 @app.command()
 def run(
-    config: str = typer.Option(
+    config: str = typer.Argument(
         "suite.yaml",
-        "--config",
-        "-c",
         help="Path to test suite YAML configuration file.",
     ),
     reporter: str = typer.Option(
