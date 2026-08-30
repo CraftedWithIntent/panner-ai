@@ -9,8 +9,6 @@ import pytest
 from assay.config.parser import SuiteConfig, TestCaseSpec
 from assay.executor.executor import (
     AgentResponse,
-    SuiteReport,
-    TestCaseReport,
     TestExecutor,
 )
 
