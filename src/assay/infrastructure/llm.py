@@ -89,9 +89,9 @@ class LLMClient:
                 tokens_used=tokens_used,
             )
 
-        except Exception as e:\n            # Phase 1: Errors propagate
+        except Exception as e:
+            # Phase 1: Errors propagate
             raise RuntimeError(f"LLM judgment failed: {e}") from e
-
     @staticmethod
     def _build_prompt(response: str, expected: str) -> str:
         """Build evaluation prompt."""

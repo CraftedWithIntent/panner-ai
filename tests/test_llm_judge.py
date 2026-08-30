@@ -1,11 +1,10 @@
 """Tests for LLM-as-Judge evaluator and infrastructure."""
 
-import json
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from assay.domain.types import AssertionSpec, AssertionType, EvaluationResult
+from assay.domain.types import AssertionSpec, AssertionType
 from assay.evaluators.llm_judge import evaluate_llm_judge
 from assay.infrastructure.llm import LLMClient, LLMResponse
 
