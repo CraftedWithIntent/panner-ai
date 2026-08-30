@@ -1,15 +1,16 @@
 """Unit tests for functional core."""
 
 import pytest
-from assay.domain.types import (
-    AssertionType,
-    AssertionSpec,
-    AgentResponse,
-)
+
 from assay.core.evaluators import (
-    evaluate_regex,
     evaluate_latency,
+    evaluate_regex,
     evaluate_status_code,
+)
+from assay.domain.types import (
+    AgentResponse,
+    AssertionSpec,
+    AssertionType,
 )
 
 

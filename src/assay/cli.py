@@ -1,7 +1,8 @@
 """Typer CLI entrypoint for Assay."""
 
-import typer
 from pathlib import Path
+
+import typer
 
 app = typer.Typer(
     name="assay",
