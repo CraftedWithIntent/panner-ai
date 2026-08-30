@@ -38,8 +38,10 @@ def temp_yaml(valid_yaml_content):
     """Create temporary YAML file."""
     with tempfile.NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
         f.write(valid_yaml_content)
-        yield f.name
-    os.unlink(f.name)
+        f.flush()  # Ensure data is written to disk
+        fname = f.name
+        yield fname
+    os.unlink(fname)
 
 
 class TestParseValidYAML:
