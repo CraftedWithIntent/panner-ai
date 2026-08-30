@@ -1,0 +1,89 @@
+name: Regression Test Suite
+description: Comprehensive regression tests with baseline tracking
+
+test_cases:
+  - name: health_endpoint
+    endpoint: "http://localhost:8000/health"
+    method: GET
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: latency
+        max_ms: 500
+
+  - name: list_items_empty
+    endpoint: "http://localhost:8000/api/items"
+    method: GET
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: json_schema
+        schema:
+          type: object
+          properties:
+            items:
+              type: array
+
+  - name: create_item
+    endpoint: "http://localhost:8000/api/items"
+    method: POST
+    body:
+      name: "Test Item"
+      description: "Created by regression test"
+    assertions:
+      - type: status_code
+        expected: 201
+      - type: json_schema
+        schema:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+
+  - name: list_items_populated
+    endpoint: "http://localhost:8000/api/items"
+    method: GET
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: json_schema
+        schema:
+          type: object
+          properties:
+            items:
+              type: array
+              minItems: 1
+
+  - name: get_item
+    endpoint: "http://localhost:8000/api/items/1"
+    method: GET
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: latency
+        max_ms: 300
+
+  - name: update_item
+    endpoint: "http://localhost:8000/api/items/1"
+    method: PATCH
+    body:
+      name: "Updated Item"
+    assertions:
+      - type: status_code
+        expected: 200
+
+  - name: delete_item
+    endpoint: "http://localhost:8000/api/items/1"
+    method: DELETE
+    assertions:
+      - type: status_code
+        expected: 204
+
+  - name: not_found
+    endpoint: "http://localhost:8000/api/items/999"
+    method: GET
+    assertions:
+      - type: status_code
+        expected: 404
