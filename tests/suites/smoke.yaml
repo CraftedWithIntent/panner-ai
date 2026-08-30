@@ -1,19 +1,21 @@
 name: Smoke Test Suite
 description: Fast baseline tests for CI/CD validation
+agent_url: http://localhost:8000
 
 test_cases:
   - name: health_check
-    endpoint: "http://localhost:8000/health"
-    method: GET
+    payload:
+      test: "health_check"
     assertions:
       - type: status_code
         expected: 200
       - type: latency
-        max_ms: 500
+        expected: null
+        tolerance: 500
 
   - name: root_endpoint
-    endpoint: "http://localhost:8000/"
-    method: GET
+    payload:
+      test: "root_endpoint"
     assertions:
       - type: status_code
         expected: 200
