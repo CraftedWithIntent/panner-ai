@@ -2,7 +2,7 @@
 
 import json
 import subprocess
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -72,7 +72,7 @@ class BaselineTracker:
 
         return (
             baseline_delta,
-            sorted(list(regressed_tests)),
+            sorted(regressed_tests),
             regression_detected,
         )
 
@@ -85,7 +85,7 @@ class BaselineTracker:
             current_scores: {test_name: {assertion_type: score}}
         """
         commit_sha = self._get_current_commit()
-        timestamp = datetime.utcnow().isoformat() + "Z"
+        timestamp = datetime.now(tz=timezone.utc).isoformat().replace("+00:00", "Z")
 
         for test_name, assertions in current_scores.items():
             if test_name not in self._baseline:
