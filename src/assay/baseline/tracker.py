@@ -70,7 +70,11 @@ class BaselineTracker:
                 else:
                     baseline_delta[test_name][assertion_type] = 0.0
 
-        return baseline_delta, sorted(list(regressed_tests)), regression_detected
+        return (
+            baseline_delta,
+            sorted(list(regressed_tests)),
+            regression_detected,
+        )
 
     def update(self, current_scores: dict[str, dict[str, float]]) -> None:
         """Update baseline.json with new scores.
