@@ -85,7 +85,7 @@ class TestExecutor:
             try:
                 with open(baseline_path) as f:
                     return json.load(f)
-            except (json.JSONDecodeError, IOError):
+            except (OSError, json.JSONDecodeError):
                 return None
         return None
 
