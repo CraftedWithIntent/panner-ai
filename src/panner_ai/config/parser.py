@@ -1,4 +1,4 @@
-"""YAML config parser for Assay test suites."""
+"""YAML config parser for Panner AI test suites."""
 
 from typing import Any
 

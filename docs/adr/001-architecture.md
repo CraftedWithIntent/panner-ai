@@ -1,11 +1,11 @@
-# ADR 001: Assay Architecture — Functional Core + Imperative Shell for Regression Testing
+# ADR 001: Panner AI Architecture — Functional Core + Imperative Shell for Regression Testing
 
 ## Status
 Accepted
 
 ## Context
 
-Assay is a regression testing framework for AI agents. Traditional testing tools fail on semantic evaluation—a prompt adjustment or model update can fix one edge case while silently breaking five others. The framework must:
+Panner AI is a regression testing framework for AI agents. Traditional testing tools fail on semantic evaluation—a prompt adjustment or model update can fix one edge case while silently breaking five others. The framework must:
 
 1. Execute test suites asynchronously against agent endpoints
 2. Evaluate semantic correctness using LLM-as-a-judge with no vendor lock-in

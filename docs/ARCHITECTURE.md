@@ -1,8 +1,8 @@
-# Assay Architecture
+# Panner AI Architecture
 
 ## Overview
 
-Assay is built on **Functional Core + Imperative Shell** (ADR-001), separating pure business logic from side effects (I/O, CLI, HTTP).
+Panner AI is built on **Functional Core + Imperative Shell** (ADR-001), separating pure business logic from side effects (I/O, CLI, HTTP).
 
 ### Principles
 

@@ -23,7 +23,7 @@ python -m py_compile src/panner-ai/**/*.py
 
 ## Architecture
 
-Assay follows **Functional Core + Imperative Shell** (ADR-001):
+Panner AI follows **Functional Core + Imperative Shell** (ADR-001):
 
 - **Functional Core**: Pure evaluators (regex, latency, JSON schema, LLM judge)
 - **Imperative Shell**: CLI (Typer), HTTP executor (asyncio), reporters (file I/O)
@@ -55,7 +55,7 @@ tests/
 
 ### Linting & Formatting
 
-Assay uses **Ruff** for all style enforcement:
+Panner AI uses **Ruff** for all style enforcement:
 
 ```bash
 ruff check src tests         # Check only
@@ -241,7 +241,7 @@ def sample_suite_config():
 
 ### Version Bumping
 
-Assay uses semantic versioning: **MAJOR.MINOR.PATCH**
+Panner AI uses semantic versioning: **MAJOR.MINOR.PATCH**
 
 - **MAJOR:** Breaking API changes
 - **MINOR:** New features (backward compatible)
@@ -310,4 +310,4 @@ except ImportError:
 
 ---
 
-**Thank you for making Assay better!**
+**Thank you for making Panner AI better!**

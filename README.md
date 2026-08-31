@@ -45,7 +45,7 @@ panner-ai run tests/suites/regression.yaml \
 
 ## Architecture
 
-Assay uses a **Functional Core + Imperative Shell** pattern:
+Panner AI uses a **Functional Core + Imperative Shell** pattern:
 
 ```
 ┌─ Config Parser (M1.1) ─────────────────────┐
@@ -203,9 +203,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 - PR workflow (max 5 files per PR)
 - How to add new reporters, evaluators, assertion types
 
-## Baseline Tracking & Regression Detection
+**Regression Tracking & Regression Detection**
 
-Assay stores test scores in `baseline.json`:
+Panner AI stores test scores in `baseline.json`:
 
 ```json
 {

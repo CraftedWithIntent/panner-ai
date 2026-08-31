@@ -48,7 +48,7 @@ If you don't specify a project in the directive:
 Work on M1.3
 ```
 
-I assume the **current session's project context**. In the Assay session, that's `panner-ai/`. In the flow-ledger session, that's `flow-ledger/`.
+I assume the **current session's project context**. In the Panner AI session, that's `panner-ai/`. In the flow-ledger session, that's `flow-ledger/`.
 
 **Ambiguity Resolution:**
 
@@ -171,8 +171,7 @@ Before I write any code in ANY workspace:
 ### Execution Discipline (MANDATORY)
 
 **Branch Strategy (Workspace-Specific):**
-- For Assay: `feature/M{X}.{Y}-{description}` (e.g., `feature/M1.3-deterministic-evaluators`)
-- For flow-ledger: Follow existing branch conventions in that repo
+- For Panner AI: `feature/M{X}.{Y}-{description}` (e.g., `feature/M1.3-deterministic-evaluators`)
 - For others: Check workspace conventions
 - Never commit to main directly
 - Always create PR before merge
@@ -191,12 +190,12 @@ I verify gates from each workspace's CI/CD config, not hardcoded here.
 - No merge commits; rebase on main before PR
 
 **PR Requirements:**
-- Title: Follows workspace convention (e.g., `M{X}.{Y}: Issue title` for Assay, `Issue #N: Title` for others)
+- Title: Follows workspace convention (e.g., `M{X}.{Y}: Issue title` for Panner AI, `Issue #N: Title` for others)
 - Body: Summarize changes, link to issue, note any design decisions
 - Labels: Auto-added from issue
 - Ready for immediate review (no drafts)
 
-**Assay-Specific PR Format:**
+**Panner AI-Specific PR Format:**
 
 *Title Format:*
 ```

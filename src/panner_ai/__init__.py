@@ -1,4 +1,4 @@
-"""Assay: Precision testing tool for AI agents."""
+"""Panner AI: Precision testing tool for AI agents."""
 
 __version__ = "0.1.0"
 

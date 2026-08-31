@@ -1,4 +1,4 @@
-name: Assay Test Suite
+name: Panner AI Test Suite
 
 on:
   push:

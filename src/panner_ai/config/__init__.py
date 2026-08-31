@@ -1,1 +1,1 @@
-"""Config module for Assay test suite parsing."""
+"""Config module for Panner AI test suite parsing."""
