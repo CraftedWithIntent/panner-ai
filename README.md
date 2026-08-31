@@ -33,6 +33,167 @@ panner-ai run tests/suites/regression.yaml \
   --baseline-file baseline.json
 ```
 
+## Build Your First Agent
+
+Panner AI shines when testing **AI agents** — services that use LLMs to make decisions. Here's a complete example:
+
+### Example: Loan Approval Agent
+
+A FastAPI service that uses Claude to evaluate loan applications:
+
+**1. Create agent service (`agent.py`)**
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+from anthropic import Anthropic
+
+app = FastAPI()
+client = Anthropic()
+
+class LoanApplication(BaseModel):
+    name: str
+    income: float
+    credit_score: int
+    loan_amount: float
+
+class LoanDecision(BaseModel):
+    approved: bool
+    interest_rate: float
+    reason: str
+    risk_score: float
+
+@app.post("/apply", response_model=LoanDecision)
+def apply_for_loan(application: LoanApplication) -> LoanDecision:
+    """Use Claude to evaluate and approve/deny loan."""
+    prompt = f"""
+    Evaluate this loan application:
+    - Applicant: {application.name}
+    - Income: ${application.income:,}
+    - Credit Score: {application.credit_score}/850
+    - Loan Amount: ${application.loan_amount:,}
+    
+    Return JSON: {{"approved": bool, "interest_rate": float, "reason": str, "risk_score": float}}
+    """
+    
+    message = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    decision_data = json.loads(message.content[0].text)
+    return LoanDecision(**decision_data)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+```
+
+**2. Create test suite (`tests/suites/loan_approval.yaml`)**
+
+```yaml
+name: Loan Approval Test Suite
+test_cases:
+  - name: approve_strong_credit
+    endpoint: "http://localhost:8000/apply"
+    method: POST
+    body:
+      name: "Alice Johnson"
+      income: 100000
+      credit_score: 780
+      loan_amount: 15000
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: json_schema
+        schema:
+          type: object
+          required: [approved, interest_rate, reason, risk_score]
+          properties:
+            approved: {type: boolean}
+            interest_rate: {type: number, minimum: 3.5, maximum: 12.5}
+            reason: {type: string}
+            risk_score: {type: number, minimum: 0.0, maximum: 1.0}
+      - type: llm_judge
+        prompt: "Is this approval decision reasonable for an excellent-credit applicant?"
+        min_score: 0.85
+
+  - name: deny_poor_credit
+    endpoint: "http://localhost:8000/apply"
+    method: POST
+    body:
+      name: "Bob Davis"
+      income: 45000
+      credit_score: 620
+      loan_amount: 25000
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: llm_judge
+        prompt: "Should this high-risk application be denied or approved with high interest?"
+        min_score: 0.75
+```
+
+**3. Install and run**
+
+```bash
+# Install dependencies
+pip install fastapi uvicorn anthropic pydantic
+
+# Start agent (background)
+python agent.py &
+
+# Run test suite
+panner-ai run tests/suites/loan_approval.yaml --reporter terminal
+
+# Expected output
+# ✅ approve_strong_credit (1.8s) — 3/3 assertions passed
+# ✅ deny_poor_credit (1.9s) — 2/2 assertions passed
+# Summary: 2 passed, 0 failed
+```
+
+**4. Add baseline tracking (regression detection)**
+
+```bash
+panner-ai run tests/suites/loan_approval.yaml \
+  --reporter terminal,json \
+  --output results.json \
+  --baseline-file baseline.json
+
+cat baseline.json
+# {
+#   "suite_name": "loan_approval",
+#   "tests": [
+#     {"name": "approve_strong_credit", "score": 0.95, "commit_sha": "a0ebd54", "timestamp": "2026-08-31T10:44:00Z"},
+#     {"name": "deny_poor_credit", "score": 0.88, "commit_sha": "a0ebd54", "timestamp": "2026-08-31T10:44:00Z"}
+#   ]
+# }
+```
+
+### Full Working Example
+
+A complete, production-ready agent example is in the **[examples/loan-approval-agent/](examples/loan-approval-agent/)** directory:
+
+- ✅ Full `agent.py` with error handling, logging, and documentation
+- ✅ `requirements.txt` with all dependencies
+- ✅ Comprehensive test suite with 4 test cases
+- ✅ Detailed `README.md` with setup, API reference, and troubleshooting
+
+**Clone and run locally:**
+
+```bash
+cd examples/loan-approval-agent
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY="your-api-key-here"
+python agent.py
+
+# In another terminal
+panner-ai run tests/suites/loan_approval.yaml --reporter terminal
+```
+
+See [examples/README.md](examples/README.md) for more agent examples and how to create your own.
+
 ## Features
 
 - **Async HTTP testing** — Concurrent requests with semaphore control (default: 5 workers)

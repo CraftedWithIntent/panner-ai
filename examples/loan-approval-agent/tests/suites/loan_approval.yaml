@@ -1,0 +1,146 @@
+name: Loan Approval Agent Test Suite
+description: Comprehensive test suite for the loan approval decision agent
+
+test_cases:
+  - name: approve_strong_credit_low_debt
+    endpoint: "http://localhost:8000/apply"
+    method: POST
+    body:
+      name: "Alice Johnson"
+      income: 100000
+      credit_score: 780
+      loan_amount: 15000
+      employment_years: 7
+      existing_debt: 5000
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: json_schema
+        schema:
+          type: object
+          required:
+            - approved
+            - interest_rate
+            - reason
+            - risk_score
+          properties:
+            approved:
+              type: boolean
+            interest_rate:
+              type: number
+              minimum: 3.5
+              maximum: 12.5
+            reason:
+              type: string
+            risk_score:
+              type: number
+              minimum: 0.0
+              maximum: 1.0
+      - type: llm_judge
+        prompt: "Is this loan approval decision reasonable? The applicant has excellent credit (780), stable income ($100k), and low existing debt. Should approve at a favorable rate."
+        min_score: 0.85
+
+  - name: approve_good_credit_moderate_debt
+    endpoint: "http://localhost:8000/apply"
+    method: POST
+    body:
+      name: "Bob Smith"
+      income: 60000
+      credit_score: 720
+      loan_amount: 12000
+      employment_years: 4
+      existing_debt: 8000
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: json_schema
+        schema:
+          type: object
+          required:
+            - approved
+            - interest_rate
+            - reason
+            - risk_score
+          properties:
+            approved:
+              type: boolean
+            interest_rate:
+              type: number
+              minimum: 3.5
+              maximum: 12.5
+            reason:
+              type: string
+            risk_score:
+              type: number
+              minimum: 0.0
+              maximum: 1.0
+      - type: llm_judge
+        prompt: "Evaluate this loan decision. The applicant has good credit (720), moderate income ($60k), and some existing debt. Decision should balance risk appropriately."
+        min_score: 0.80
+
+  - name: deny_poor_credit_high_debt
+    endpoint: "http://localhost:8000/apply"
+    method: POST
+    body:
+      name: "Charlie Davis"
+      income: 45000
+      credit_score: 620
+      loan_amount: 25000
+      employment_years: 1
+      existing_debt: 20000
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: json_schema
+        schema:
+          type: object
+          required:
+            - approved
+            - reason
+            - risk_score
+          properties:
+            approved:
+              type: boolean
+            reason:
+              type: string
+            risk_score:
+              type: number
+              minimum: 0.0
+              maximum: 1.0
+      - type: llm_judge
+        prompt: "Assess this loan decision. The applicant has poor credit (620), limited employment history (1 year), and very high debt-to-income ratio. Should likely be denied or approved with high interest rate."
+        min_score: 0.75
+
+  - name: validate_endpoint_performance
+    endpoint: "http://localhost:8000/apply"
+    method: POST
+    body:
+      name: "Diana Wilson"
+      income: 80000
+      credit_score: 750
+      loan_amount: 18000
+      employment_years: 6
+      existing_debt: 3000
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: latency
+        max_ms: 5000
+      - type: json_schema
+        schema:
+          type: object
+          required:
+            - approved
+            - interest_rate
+            - reason
+            - risk_score
+          properties:
+            approved:
+              type: boolean
+            interest_rate:
+              type: number
+            reason:
+              type: string
+              minLength: 10
+            risk_score:
+              type: number

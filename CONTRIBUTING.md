@@ -197,6 +197,234 @@ def sample_suite_config():
 4. **Update issue label:** `status:backlog` → `status:in-progress` (if applicable)
 5. **Create feature branch:** `git checkout -b feature/ISSUE-description`
 
+## Examples
+
+Panner AI examples live in `examples/` and demonstrate **complete, production-ready AI agents**.
+
+### Why Examples Matter
+
+Examples are the best way for users to:
+- ✅ Learn how to build AI agents
+- ✅ See Panner AI in action
+- ✅ Copy-paste working code
+- ✅ Understand testing patterns
+
+### Example Structure
+
+Each example follows this structure:
+
+```
+examples/
+├── README.md                          # Index of all examples
+│
+└── YOUR-AGENT-NAME/
+    ├── README.md                      # Setup, API reference, troubleshooting
+    ├── agent.py                       # Full agent implementation (production-ready)
+    ├── requirements.txt               # Dependencies
+    └── tests/
+        └── suites/
+            └── test_suite.yaml        # 4+ test cases (happy path, edge cases, errors)
+```
+
+### Adding a New Example
+
+**Step 1: Create directory structure**
+
+```bash
+mkdir -p examples/YOUR-AGENT-NAME/tests/suites
+```
+
+**Step 2: Implement agent (`agent.py`)**
+
+Requirements:
+- ✅ Use FastAPI or another HTTP framework
+- ✅ Include LLM integration (Claude, GPT-4, etc. via LiteLLM)
+- ✅ Use Pydantic for request/response validation
+- ✅ Include comprehensive docstrings
+- ✅ Handle errors gracefully
+- ✅ Runnable with `python agent.py` (no CLI args)
+- ✅ ~200-400 lines including comments
+
+Example template:
+
+```python
+"""Your Agent — Brief description."""
+
+import logging
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI(title="Your Agent")
+logger = logging.getLogger(__name__)
+
+class Input(BaseModel):
+    """Agent input model."""
+    name: str
+
+class Output(BaseModel):
+    """Agent output model."""
+    result: str
+
+@app.post("/process", response_model=Output)
+def process(input: Input) -> Output:
+    """Process request using LLM reasoning."""
+    # Your LLM logic here
+    return Output(result=f"Processed {input.name}")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+```
+
+**Step 3: Create test suite (`tests/suites/test_suite.yaml`)**
+
+Requirements:
+- ✅ 4+ test cases (happy path, edge cases, errors, performance)
+- ✅ Mix of assertion types (status_code, json_schema, latency, llm_judge)
+- ✅ Realistic request data
+- ✅ Clear test names and descriptions
+
+Example structure:
+
+```yaml
+name: Your Agent Test Suite
+description: Comprehensive test suite
+
+test_cases:
+  - name: happy_path_test
+    endpoint: "http://localhost:8000/process"
+    method: POST
+    body:
+      name: "test"
+    assertions:
+      - type: status_code
+        expected: 200
+      - type: json_schema
+        schema:
+          type: object
+          required: [result]
+          properties:
+            result: {type: string}
+      - type: latency
+        max_ms: 2000
+      - type: llm_judge
+        prompt: "Is this response reasonable?"
+        min_score: 0.8
+
+  - name: edge_case_test
+    # ...
+
+  - name: error_handling_test
+    # ...
+
+  - name: performance_test
+    # ...
+```
+
+**Step 4: Create `requirements.txt`**
+
+```
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0
+anthropric==0.7.1
+requests==2.31.0
+```
+
+**Step 5: Create detailed `README.md`**
+
+Must include:
+
+- 📝 **What It Does** — 1-2 paragraphs explaining the agent
+- 🏗️ **Architecture** — Diagram or text description
+- 🚀 **Quick Start** — Install, run, test (5 steps max)
+- 📡 **API Reference** — Request/response models with examples
+- 🧪 **Test Suite Overview** — What each test case covers
+- 🔧 **Troubleshooting** — Common errors and solutions
+- ➡️ **Next Steps** — How to extend or modify the example
+
+See [examples/loan-approval-agent/README.md](examples/loan-approval-agent/README.md) for a complete template.
+
+**Step 6: Test locally**
+
+```bash
+cd examples/YOUR-AGENT-NAME
+
+# Install deps
+pip install -r requirements.txt
+
+# Run agent
+python agent.py
+
+# In another terminal, run tests
+panner-ai run tests/suites/test_suite.yaml --reporter terminal
+
+# All tests should pass ✅
+```
+
+**Step 7: Update examples index**
+
+Edit [examples/README.md](examples/README.md) to add your example in the "Quick Links" section:
+
+```markdown
+### Your Agent Name
+
+**Directory:** `your-agent-name/`
+
+Brief description of what it does.
+
+**Quick Start:**
+```bash
+cd your-agent-name
+pip install -r requirements.txt
+python agent.py
+panner-ai run tests/suites/test_suite.yaml
+```
+```
+
+**Step 8: Submit PR**
+
+```bash
+git add examples/YOUR-AGENT-NAME/
+git add examples/README.md
+git commit -m "feat: Add YOUR-AGENT-NAME example"
+gh pr create --title "feat: Add YOUR-AGENT-NAME example"
+```
+
+### Example Quality Checklist
+
+Before submitting an example, verify:
+
+- [ ] `agent.py` is complete and production-ready (no TODOs)
+- [ ] `agent.py` uses LLM (Claude, GPT-4, etc.)
+- [ ] `agent.py` has comprehensive docstrings
+- [ ] `agent.py` handles errors and logs properly
+- [ ] `requirements.txt` lists all dependencies with pinned versions
+- [ ] `tests/suites/test_suite.yaml` has 4+ test cases
+- [ ] Test cases cover happy path, edge cases, errors, and performance
+- [ ] Test assertions use multiple types (status_code, json_schema, latency, llm_judge)
+- [ ] `README.md` has all required sections
+- [ ] `README.md` includes working Quick Start instructions
+- [ ] API reference shows all request/response fields
+- [ ] All tests pass when running locally
+- [ ] Agent runs with `python agent.py` (no CLI args)
+- [ ] Example is realistic and solves a real problem
+- [ ] Code follows Ruff style guidelines (`ruff check --fix`)
+- [ ] Example is added to [examples/README.md](examples/README.md)
+
+### Example Ideas
+
+Looking for example ideas? Consider:
+
+- **Document Processing** — Extract entities from PDFs/images using Claude vision
+- **Code Review Bot** — Use Claude to analyze and review code PRs
+- **Customer Support Classifier** — Route support tickets to teams using LLM reasoning
+- **Content Moderation** — Check user-generated content for violations
+- **Multi-step Workflow** — Agent that breaks down complex tasks into steps
+- **Real-time Chat** — WebSocket endpoint that streams Claude responses
+- **Data Validation** — Semantic validation (e.g., "Does this bio sound realistic?")
+- **Test Data Generator** — Create realistic test data using an LLM
+
 ### During Development
 
 - Keep scope small: **Max 5 files per PR** (excludes lockfiles, .sln, .csproj, generated files)
