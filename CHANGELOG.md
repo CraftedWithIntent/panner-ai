@@ -4,6 +4,40 @@ All notable changes to Panner AI are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2026-08-31
+
+### Added
+
+- **Comprehensive Examples & Documentation** — Production-ready reference implementations
+  - `examples/loan-approval-agent/` — Full working AI agent using FastAPI + Claude
+    - Complete agent.py with error handling and JSON parsing
+    - 4-test regression suite with semantic correctness checks
+    - Local setup guide and API reference
+  - Updated README with "Build Your First Agent" section
+    - Step-by-step workflow: build → host → test
+    - Inline FastAPI example with Claude integration
+    - Full end-to-end loan approval scenario
+  - Enhanced CONTRIBUTING.md with Examples section
+    - 8-step guide for adding new examples
+    - 15-item quality checklist for example contributions
+    - Curated list of example ideas (document processing, code review, support classification, etc.)
+  - Donation configuration (GitHub Sponsors + Open Collective)
+    - `.github/FUNDING.yml` for community support
+    - Links to transparent funding platform
+
+### Documentation
+
+- README.md — Added "Build Your First Agent" section with production code
+- CONTRIBUTING.md — New "Examples" section with contribution guidelines
+- examples/README.md — Index and guidelines for example agents
+- examples/loan-approval-agent/README.md — Complete setup and usage documentation
+
+### Quality
+
+- All examples tested locally (agent ✅, tests ✅, CI integration ✅)
+- 100% documentation coverage for new features
+- Examples follow project code style and best practices
+
 ## [0.1.2] - 2026-08-31
 
 ### Added
