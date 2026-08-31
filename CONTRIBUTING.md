@@ -1,5 +1,82 @@
 # Contributing to Panner AI
 
+👋 **We actively welcome community contributions!** Whether you're fixing a typo, adding a new evaluator, or implementing a major feature — your help makes Panner AI better.
+
+## 🎯 Quick Start for Contributors
+
+### New to Panner AI?
+
+1. **Pick an issue:** Browse [#good-first-issue](https://github.com/CraftedWithIntent/panner-ai/labels/good%20first%20issue) or [#help-wanted](https://github.com/CraftedWithIntent/panner-ai/labels/help%20wanted) labels
+2. **Review ideas:** See [docs/CONTRIBUTION_IDEAS.md](docs/CONTRIBUTION_IDEAS.md) for 25+ contribution ideas (🟢 Easy → 🔴 Hard)
+3. **Comment on issue:** Let us know you're interested
+4. **Follow the guide:** Setup, code, test, submit PR
+5. **Get feedback:** We'll review and merge if it meets criteria
+
+## Help Wanted
+
+These issues are ready for community pickup. **All skill levels welcome!**
+
+### 🟢 Good First Issues (Easy, 0.5–2 hours)
+
+Perfect for learning Panner AI. No deep architecture knowledge needed.
+
+- **Add HTTP header validation** — New `header_check` evaluator
+- **Implement retry logic** — Exponential backoff for HTTP requests  
+- **Add XML schema validation** — New `xml_schema` evaluator
+- **Generate HTML reports** — Beautiful dashboard of test results
+- **Slack integration** — Post test results to Slack
+- **Performance baseline tracking** — Track latency over time
+- **Environment variable support** — `${ENV_VAR}` substitution in YAML
+- **Response size validation** — Check min/max response body size
+- **Test filtering** — `--filter` CLI flag to run subset of tests
+- **Assertion negation** — Support `negate: true` on assertions
+
+### 🟡 Medium Issues (Intermediate, 2–4 hours)
+
+Requires understanding Panner AI internals.
+
+- **GraphQL support** — Test GraphQL APIs and schemas
+- **Plugin system** — Custom evaluators without forking
+- **Database assertions** — Verify side effects in database
+- **Multi-step workflows** — Chain tests with variable passing
+- **OpenAPI validation** — Validate against API specs
+- **Latency percentiles** — Track p50, p95, p99 metrics
+- **Retry on failure** — Handle eventual consistency testing
+- **Baseline logging** — Store compressed request/response
+- **Better concurrent reporting** — Improved terminal output
+- **LLM cost tracking** — Track token usage and expenses
+
+### 🔴 Hard Issues (Advanced, 4+ hours)
+
+Requires deep knowledge of async, statistics, or architecture.
+
+- **Bayesian regression detection** — Statistical model for regressions
+- **Distributed testing** — Run tests across multiple machines
+- **Anomaly detection** — Detect unusual metric patterns
+- **Result diff visualization** — Visual diffs between runs
+- **Custom reporter plugins** — Extensible reporting framework
+
+---
+
+**👉 [See docs/CONTRIBUTION_IDEAS.md](docs/CONTRIBUTION_IDEAS.md) for detailed descriptions, acceptance criteria, and implementation hints for all 25+ ideas.**
+
+---
+
+## The Contribution Path
+
+1. **Pick an issue** (🟢 Good First Issue recommended)
+2. **Comment on GitHub issue:** "I'd like to work on this"
+3. **Read relevant docs:** This file + [docs/CONTRIBUTION_IDEAS.md](docs/CONTRIBUTION_IDEAS.md)
+4. **Setup dev environment:** Follow "Setup" section below
+5. **Implement & test:** Write code, run tests, ensure 80%+ coverage
+6. **Submit PR:** Link to GitHub issue, describe changes
+7. **Iterate:** Address reviewer feedback  
+8. **Merge:** We'll squash + merge when ready
+
+**Pro tip:** Start with 🟢 Good First Issues to learn the codebase, then tackle harder issues.
+
+---
+
 Thank you for contributing! This guide explains how to develop, test, and submit changes to Panner AI.
 
 ## Setup

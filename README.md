@@ -358,11 +358,35 @@ Minimum 80% (enforced by CI/CD)
 
 ## Contributing
 
+👋 **Interested in contributing? We'd love your help!** Panner AI is a community-driven project.
+
+Whether you're fixing a typo, adding a new evaluator, or implementing a major feature — all skill levels welcome.
+
+### Quick Start for Contributors
+
+1. **Browse open issues:** Check [#good-first-issue](https://github.com/CraftedWithIntent/panner-ai/labels/good%20first%20issue) (🟢 Easy) or [#help-wanted](https://github.com/CraftedWithIntent/panner-ai/labels/help%20wanted) labels
+2. **Read contribution ideas:** See [docs/CONTRIBUTION_IDEAS.md](docs/CONTRIBUTION_IDEAS.md) for 25+ ideas with detailed guidance
+3. **Pick an issue:** Comment "I'd like to work on this" to claim it
+4. **Follow the contribution guide:** Setup, code, test (80%+ coverage required), submit PR
+5. **Get feedback:** We'll review and merge if it meets criteria
+
+### All Skill Levels Welcome
+
+- **🟢 Easy (0.5–2 hours):** Add HTTP header validation, retry logic, XML schema validation, HTML reports, Slack integration, and more
+- **🟡 Medium (2–4 hours):** GraphQL support, plugin system, database assertions, multi-step workflows, OpenAPI validation
+- **🔴 Hard (4+ hours):** Bayesian regression detection, distributed testing, anomaly detection, custom reporters
+
+### Full Documentation
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 - Setup instructions
-- Code style + linting rules
+- Code style + linting rules (Ruff)
 - PR workflow (max 5 files per PR)
-- How to add new reporters, evaluators, assertion types
+- How to add new evaluators, reporters, assertion types
+- Testing requirements (80%+ coverage)
+- Release process
+
+---
 
 **Regression Tracking & Regression Detection**
 
@@ -411,10 +435,7 @@ MIT License — See [LICENSE](LICENSE)
 
 ## Support
 
-- Issues: [GitHub Issues](https://github.com/CraftedWithIntent/panner-ai/issues)
-- Discussions: [GitHub Discussions](https://github.com/CraftedWithIntent/panner-ai/discussions)
-- Documentation: [docs/](docs/)
-
----
-
-**Built for testing AI systems that care about correctness.**
+- **Issues:** [GitHub Issues](https://github.com/CraftedWithIntent/panner-ai/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/CraftedWithIntent/panner-ai/discussions)
+- **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md) + [docs/CONTRIBUTION_IDEAS.md](docs/CONTRIBUTION_IDEAS.md)
+- **Email:** support@craftedwithintent.com
