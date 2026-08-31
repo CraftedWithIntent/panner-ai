@@ -4,7 +4,7 @@ import json
 import re
 from collections.abc import Callable
 
-from assay.domain.types import (
+from panner_ai.domain.types import (
     AgentResponse,
     AssertionSpec,
     AssertionType,
@@ -100,7 +100,7 @@ def get_evaluator(assertion_type: AssertionType) -> Callable:
     """Router: returns the appropriate evaluator function.
     
     Note: LLM_JUDGE evaluator is async and requires special handling in pipeline.
-    See assay.evaluators.llm_judge for async variant.
+    See panner_ai.evaluators.llm_judge for async variant.
     """
     evaluators = {
         AssertionType.REGEX: evaluate_regex,

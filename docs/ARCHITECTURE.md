@@ -1,8 +1,8 @@
-# Assay Architecture
+# Panner AI Architecture
 
 ## Overview
 
-Assay is built on **Functional Core + Imperative Shell** (ADR-001), separating pure business logic from side effects (I/O, CLI, HTTP).
+Panner AI is built on **Functional Core + Imperative Shell** (ADR-001), separating pure business logic from side effects (I/O, CLI, HTTP).
 
 ### Principles
 
@@ -177,7 +177,7 @@ else:
 
 ## Module Organization
 
-### src/assay/
+### src/panner-ai/
 
 ```
 config/
@@ -313,20 +313,20 @@ if current_score < prior_score - 0.1:
 
 ### Adding a New Evaluator
 
-1. **Create evaluator function** (`src/assay/evaluators/my_check.py`):
+1. **Create evaluator function** (`src/panner-ai/evaluators/my_check.py`):
    ```python
    def evaluate_my_check(response: httpx.Response, spec: AssertionSpec) -> bool | float:
        """Pure function, no side effects."""
        return True  # or score (0.0–1.0) for LLM-like evaluators
    ```
 
-2. **Add to AssertionType enum** (`src/assay/domain/types.py`):
+2. **Add to AssertionType enum** (`src/panner-ai/domain/types.py`):
    ```python
    class AssertionType(str, Enum):
        MY_CHECK = "my_check"
    ```
 
-3. **Register in pipeline** (`src/assay/core/pipeline.py`):
+3. **Register in pipeline** (`src/panner-ai/core/pipeline.py`):
    ```python
    EVALUATORS = {
        AssertionType.MY_CHECK: evaluate_my_check,
@@ -346,7 +346,7 @@ if current_score < prior_score - 0.1:
            pass
    ```
 
-2. **Export in CLI** (`src/assay/cli.py`):
+2. **Export in CLI** (`src/panner-ai/cli.py`):
    ```python
    reporters_map = {
        "my_format": MyReporter,

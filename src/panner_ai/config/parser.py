@@ -1,4 +1,4 @@
-"""YAML config parser for Assay test suites."""
+"""YAML config parser for Panner AI test suites."""
 
 from typing import Any
 
@@ -6,7 +6,7 @@ import yaml
 from pydantic import BaseModel, field_validator
 from pydantic import ValidationError as PydanticValidationError
 
-from assay.domain.types import AssertionType
+from panner_ai.domain.types import AssertionType
 
 
 class ConfigParseError(Exception):

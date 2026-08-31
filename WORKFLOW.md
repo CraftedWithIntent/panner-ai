@@ -15,7 +15,7 @@ I work on everything under `/Users/philipthomas/.openclaw/workspaces/`:
 | Workspace | Purpose | Status |
 |-----------|---------|--------|
 | **ash-orchestrator** | Primary orchestrator (you are here) | Active |
-| **assay** | Precision testing for AI agents | Active (Phase 1) |
+| **panner-ai** | Precision testing for AI agents | Active (Phase 1) |
 | **orch-1** | Sub-orchestrator for Projects 1-10 | Placeholder |
 | **orch-2** | Sub-orchestrator for Projects 11-20 | Placeholder |
 | **flow-ledger** | Finance ledger system | Active |
@@ -27,7 +27,7 @@ I work on everything under `/Users/philipthomas/.openclaw/workspaces/`:
 **Explicit Project Specification (Preferred):**
 
 ```
-Work on assay M1.3
+Work on panner-ai M1.3
 
 or
 
@@ -48,7 +48,7 @@ If you don't specify a project in the directive:
 Work on M1.3
 ```
 
-I assume the **current session's project context**. In the Assay session, that's `assay/`. In the flow-ledger session, that's `flow-ledger/`.
+I assume the **current session's project context**. In the Panner AI session, that's `panner-ai/`. In the flow-ledger session, that's `flow-ledger/`.
 
 **Ambiguity Resolution:**
 
@@ -56,7 +56,7 @@ If the project name is unclear or non-existent:
 
 ```
 ❓ "Work on X" — but X workspace doesn't exist
-Assuming: Did you mean 'assay'? Or 'orch-1'?
+Assuming: Did you mean 'panner-ai'? Or 'orch-1'?
 Action: Asking for clarification before proceeding
 ```
 
@@ -65,7 +65,7 @@ I'll never guess at workspace routing. Always ask if ambiguous.
 ### Workspace-Specific Workflows
 
 Each workspace has its own:
-- GitHub repo (e.g., `CraftedWithIntent/assay`, `philipthomas/flow-ledger`)
+- GitHub repo (e.g., `CraftedWithIntent/panner-ai`, `philipthomas/flow-ledger`)
 - Issue tracking (GitHub issues per repo)
 - CI/CD pipelines
 - Tech stack & tooling
@@ -95,7 +95,7 @@ Pick up M1.5 and close it
 ### Simple Directive (With Explicit Project)
 
 ```
-Work on assay M1.3
+Work on panner-ai M1.3
 
 or
 
@@ -123,7 +123,7 @@ Handle game-dev PR #7 review
 If you want to override defaults:
 
 ```
-Work on assay M1.4 (LLM Judge)
+Work on panner-ai M1.4 (LLM Judge)
 - Use Claude 3.5 Sonnet, not GPT-4
 - Prioritize fallback logic over perfect parsing
 - Don't worry about production metrics yet, focus on happy path
@@ -134,19 +134,19 @@ I'll incorporate context and adjust execution accordingly.
 ### Batch Work (Same or Different Workspaces)
 
 ```
-Start assay M1.1, M1.2, M1.3 - but only create branches, don't merge yet
+Start panner-ai M1.1, M1.2, M1.3 - but only create branches, don't merge yet
 ```
 
 or
 
 ```
-Finish assay M1.5 and M1.6 back-to-back
+Finish panner-ai M1.5 and M1.6 back-to-back
 ```
 
 or
 
 ```
-Work on assay M1.3, then flow-ledger #42, then game-dev PR review
+Work on panner-ai M1.3, then flow-ledger #42, then game-dev PR review
 ```
 
 I'll route to each workspace, batch independent work efficiently, and report completion state per project.
@@ -171,8 +171,7 @@ Before I write any code in ANY workspace:
 ### Execution Discipline (MANDATORY)
 
 **Branch Strategy (Workspace-Specific):**
-- For Assay: `feature/M{X}.{Y}-{description}` (e.g., `feature/M1.3-deterministic-evaluators`)
-- For flow-ledger: Follow existing branch conventions in that repo
+- For Panner AI: `feature/M{X}.{Y}-{description}` (e.g., `feature/M1.3-deterministic-evaluators`)
 - For others: Check workspace conventions
 - Never commit to main directly
 - Always create PR before merge
@@ -191,12 +190,12 @@ I verify gates from each workspace's CI/CD config, not hardcoded here.
 - No merge commits; rebase on main before PR
 
 **PR Requirements:**
-- Title: Follows workspace convention (e.g., `M{X}.{Y}: Issue title` for Assay, `Issue #N: Title` for others)
+- Title: Follows workspace convention (e.g., `M{X}.{Y}: Issue title` for Panner AI, `Issue #N: Title` for others)
 - Body: Summarize changes, link to issue, note any design decisions
 - Labels: Auto-added from issue
 - Ready for immediate review (no drafts)
 
-**Assay-Specific PR Format:**
+**Panner AI-Specific PR Format:**
 
 *Title Format:*
 ```
@@ -283,7 +282,7 @@ You unblock → I resume immediately and move to `status:review`.
 
 If I finish in one session:
 ```
-✅ assay M1.3 complete. PR ready: #<number>
+✅ panner-ai M1.3 complete. PR ready: #<number>
 ```
 
 If work spans multiple sessions:
@@ -299,7 +298,7 @@ ETA: Next session (3 hours more).
 Example: Upstream API changed, breaking tests.
 
 ```
-🚫 BLOCKED: assay M1.4 (LLM Judge)
+🚫 BLOCKED: panner-ai M1.4 (LLM Judge)
 Reason: Claude API rate limit exceeded during testing
 Action: Needs API key refresh or fallback to mock
 Awaiting: Your direction (use mock? try different model?)
@@ -310,8 +309,8 @@ I'll wait for your guidance before proceeding.
 ### When Done
 
 ```
-✅ assay M1.X merged to main. Branch deleted.
-Next available: Ready for assay M1.Y or any other project
+✅ panner-ai M1.X merged to main. Branch deleted.
+Next available: Ready for panner-ai M1.Y or any other project
 ```
 
 ---
@@ -351,7 +350,7 @@ Next available: Ready for assay M1.Y or any other project
 If I encounter architectural ambiguity mid-task:
 
 ```
-❓ assay M1.2 (Transport): Should concurrent request pool be 5 or 10?
+❓ panner-ai M1.2 (Transport): Should concurrent request pool be 5 or 10?
 Options:
   A) Pool size = 5 (conservative, safer)
   B) Pool size = 10 (faster, risk of rate limits)
@@ -368,13 +367,13 @@ I'll propose and wait for your call. Never guess on design.
 ### Example 1: Simple Feature (Assay M1.1 — Config Parser)
 
 ```
-You: Work on assay M1.1
+You: Work on panner-ai M1.1
 
 Me: 
-✓ Routing: ~/.openclaw/workspaces/assay/
+✓ Routing: ~/.openclaw/workspaces/panner-ai/
 ✓ Pre-work checklist passed (main clean, no open PRs)
 ✓ Branch created: feature/M1.1-config-parser
-✓ Code written: src/assay/infrastructure/parser.py
+✓ Code written: src/panner-ai/infrastructure/parser.py
 ✓ Tests added: tests/test_config_parser.py
 ✓ Build passing: ruff ✓ | pyright ✓ | pytest ✓
 ✓ PR created: #10 "M1.1: Config Parser"
@@ -405,7 +404,7 @@ You review → I merge → Back to ready state.
 ### Example 3: Batch Work (Multiple Projects)
 
 ```
-You: Finish assay M1.5, then flow-ledger #42, then review game-dev PR #7
+You: Finish panner-ai M1.5, then flow-ledger #42, then review game-dev PR #7
 
 Me:
 ✓ Assay M1.5 complete (PR #11) → merged
@@ -420,7 +419,7 @@ Me:
 ### Example 4: Blocked Work
 
 ```
-You: Start assay M1.4
+You: Start panner-ai M1.4
 
 Me:
 ✓ Pre-work checklist passed
@@ -462,7 +461,7 @@ I fix on the branch and update the PR. No force-pushes to `main`.
 ### If I Discover Scope Creep
 
 ```
-⚠️ assay M1.3 (Evaluators): Discovered that JSON schema validation needs recursive key checking
+⚠️ panner-ai M1.3 (Evaluators): Discovered that JSON schema validation needs recursive key checking
 Current scope only handles top-level keys.
 
 Options:
@@ -509,5 +508,5 @@ I'll handle the rest. This document is your reference for what happens behind th
 ---
 
 **Ash, Primary Orchestrator**  
-All Workspaces (ash-orchestrator, assay, flow-ledger, game-dev, orchestrators, future projects)  
+All Workspaces (ash-orchestrator, panner-ai, flow-ledger, game-dev, orchestrators, future projects)  
 Last Updated: 2026-08-30

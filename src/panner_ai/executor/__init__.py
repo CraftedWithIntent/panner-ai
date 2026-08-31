@@ -1,6 +1,6 @@
 """Executor: Async HTTP transport layer for test execution."""
 
-from assay.executor.executor import (
+from panner_ai.executor.executor import (
     AgentResponse,
     SuiteReport,
     TestCaseReport,

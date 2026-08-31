@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "assay"
+name = "panner-ai"
 version = "0.1.0"
 description = "Precision testing tool for AI agents with baseline tracking and LLM evaluation"
 readme = "README.md"
@@ -38,11 +38,11 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/CraftedWithIntent/assay"
-Repository = "https://github.com/CraftedWithIntent/assay.git"
-Documentation = "https://github.com/CraftedWithIntent/assay/blob/main/docs/ARCHITECTURE.md"
-Issues = "https://github.com/CraftedWithIntent/assay/issues"
-Changelog = "https://github.com/CraftedWithIntent/assay/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/CraftedWithIntent/panner-ai"
+Repository = "https://github.com/CraftedWithIntent/panner-ai.git"
+Documentation = "https://github.com/CraftedWithIntent/panner-ai/blob/main/docs/ARCHITECTURE.md"
+Issues = "https://github.com/CraftedWithIntent/panner-ai/issues"
+Changelog = "https://github.com/CraftedWithIntent/panner-ai/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 dev = [
@@ -53,7 +53,7 @@ dev = [
 ]
 
 [project.scripts]
-assay = "assay.cli:app"
+panner-ai = "panner_ai.cli:app"
 
 [tool.ruff]
 line-length = 100
@@ -63,7 +63,7 @@ target-version = "py311"
 extend-ignore = ["UP017", "BLE001"]  # UP017: datetime.UTC 3.13+; BLE001: Phase 1 error propagation via exit codes
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/assay"]
+packages = ["src/panner_ai"]
 
 [tool.pyright]
 pythonVersion = "3.11"

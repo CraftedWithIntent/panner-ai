@@ -1,7 +1,7 @@
 """Pure pipeline reducer: orchestrates evaluators without I/O."""
 
-from assay.core.evaluators import get_evaluator
-from assay.domain.types import (
+from panner_ai.core.evaluators import get_evaluator
+from panner_ai.domain.types import (
     AgentResponse,
     AssertionSpec,
     SuiteReport,

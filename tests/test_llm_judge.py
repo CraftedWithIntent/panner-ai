@@ -4,9 +4,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from assay.domain.types import AssertionSpec, AssertionType
-from assay.evaluators.llm_judge import evaluate_llm_judge
-from assay.infrastructure.llm import LLMClient, LLMResponse
+from panner_ai.domain.types import AssertionSpec, AssertionType
+from panner_ai.evaluators.llm_judge import evaluate_llm_judge
+from panner_ai.infrastructure.llm import LLMClient, LLMResponse
 
 
 @pytest.mark.asyncio

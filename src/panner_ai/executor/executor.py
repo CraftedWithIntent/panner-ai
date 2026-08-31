@@ -7,7 +7,7 @@ from typing import Any
 
 import httpx
 
-from assay.config.parser import SuiteConfig
+from panner_ai.config.parser import SuiteConfig
 
 
 @dataclass(frozen=True)

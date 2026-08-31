@@ -2,8 +2,8 @@
 
 import xml.etree.ElementTree as ET
 
-from assay.executor.executor import SuiteReport
-from assay.reporters.base import Reporter
+from panner_ai.executor.executor import SuiteReport
+from panner_ai.reporters.base import Reporter
 
 
 class JUnitReporter(Reporter):

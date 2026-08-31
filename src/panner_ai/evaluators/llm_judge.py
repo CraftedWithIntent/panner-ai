@@ -1,10 +1,10 @@
 """LLM-as-Judge evaluator: Semantic correctness scoring via Claude/GPT-4."""
 
-from assay.domain.types import (
+from panner_ai.domain.types import (
     AssertionSpec,
     EvaluationResult,
 )
-from assay.infrastructure.llm import LLMClient
+from panner_ai.infrastructure.llm import LLMClient
 
 
 async def evaluate_llm_judge(
