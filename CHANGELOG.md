@@ -4,6 +4,53 @@ All notable changes to Panner AI are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-08-31
+
+### Added
+
+- **Open-Source Launch Preparation** — Production-ready governance and distribution
+  - `LICENSE` file — MIT License for permissive open-source distribution
+  - `SECURITY.md` — Vulnerability disclosure policy (responsible disclosure)
+  - `CODE_OF_CONDUCT.md` — Contributor Covenant 2.1 community guidelines
+  - Enhanced PyPI classifiers — 15+ metadata tags for discoverability
+  - Project URLs in pyproject.toml — Homepage, Repository, Documentation, Issues, Changelog
+  - Release notes with feature summary, installation, quick start, and roadmap
+
+### Changed
+
+- Updated `pyproject.toml` with comprehensive classifiers:
+  - Added Environment, Intended Audience, Operating System, Typing metadata
+  - Expanded Python version targeting with explicit 3.11 and 3.12 support
+  - Added "Topic :: Internet :: WWW/HTTP" for better categorization
+  - Verified project URLs match GitHub repository structure
+- Version bumped to 0.1.2 for open-source release
+
+### Documentation
+
+- README.md — Already includes architecture, quick start, usage examples, CLI reference
+- CONTRIBUTING.md — Already covers setup, code style, PR workflow
+- docs/ARCHITECTURE.md — Comprehensive system design and extension points
+
+### Known Limitations (Phase 1)
+
+- No conditional test skipping (Phase 2 feature)
+- No advanced report filtering (Phase 2 feature)
+- Baseline regression threshold hardcoded to -0.1 (Phase 2: configurable)
+- No authentication support in HTTP executor (Phase 2: OAuth2, API keys)
+- Limited custom assertion types (Phase 2: user-defined evaluators via plugins)
+
+### Roadmap (Phase 2+)
+
+- [ ] Authentication support (OAuth2, API keys, JWT)
+- [ ] Conditional test skipping (environment-based, tag-based)
+- [ ] Advanced reporting (HTML, Markdown, Slack integration)
+- [ ] Plugin system for custom evaluators
+- [ ] Configurable baseline thresholds
+- [ ] Performance profiling integration
+- [ ] Load testing mode (variable concurrency, ramp-up)
+
+---
+
 ## [0.1.0] - 2026-08-31
 
 ### Added
