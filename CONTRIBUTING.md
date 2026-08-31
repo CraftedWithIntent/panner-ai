@@ -7,8 +7,8 @@ Thank you for contributing! This guide explains how to develop, test, and submit
 ### Clone and install in dev mode
 
 ```bash
-git clone https://github.com/CraftedWithIntent/assay.git
-cd assay
+git clone https://github.com/CraftedWithIntent/panner-ai.git
+cd panner-ai
 python -m venv venv
 source venv/bin/activate  # on Windows: venv\Scripts\activate
 pip install -e .[dev]
@@ -18,7 +18,7 @@ pip install -e .[dev]
 
 ```bash
 pytest tests/ -v
-python -m py_compile src/assay/**/*.py
+python -m py_compile src/panner-ai/**/*.py
 ```
 
 ## Architecture
@@ -31,7 +31,7 @@ Assay follows **Functional Core + Imperative Shell** (ADR-001):
 ### Code Organization
 
 ```
-src/assay/
+src/panner-ai/
 ├── config/           # M1.1: Config parsing (Pydantic models)
 ├── executor/         # M1.2: HTTP dispatcher (asyncio, semaphore)
 ├── evaluators/       # M1.3–M1.4: Pure evaluation functions
@@ -106,7 +106,7 @@ pytest tests/ -v
 pytest tests/test_parser.py -v
 
 # With coverage
-pytest tests/ --cov=src/assay --cov-report=term-missing
+pytest tests/ --cov=src/panner-ai --cov-report=term-missing
 
 # With markers
 pytest tests/ -m "not slow" -v
@@ -127,7 +127,7 @@ pytest tests/ -m "not slow" -v
 from unittest.mock import patch, MagicMock
 import pytest
 
-@patch("assay.evaluators.llm_judge.litellm.completion")
+@patch("panner-ai.evaluators.llm_judge.litellm.completion")
 def test_llm_judge_mocked(mock_llm):
     mock_llm.return_value = {"choices": [{"message": {"content": '{"score": 0.9}'}}]}
     # Test assertion
@@ -152,7 +152,7 @@ def sample_suite_config():
 
 ### Adding New Evaluators
 
-1. **Create evaluator function** in `src/assay/evaluators/<name>.py`:
+1. **Create evaluator function** in `src/panner-ai/evaluators/<name>.py`:
    ```python
    def evaluate_my_check(response: httpx.Response, config: AssertionSpec) -> bool:
        """Evaluate custom assertion."""
@@ -160,7 +160,7 @@ def sample_suite_config():
        return True  # or False
    ```
 
-2. **Register in pipeline** (`src/assay/core/pipeline.py`):
+2. **Register in pipeline** (`src/panner-ai/core/pipeline.py`):
    ```python
    EVALUATORS = {
        AssertionType.STATUS_CODE: evaluate_status_code,
@@ -191,8 +191,8 @@ def sample_suite_config():
 2. **Verify main clean:** `git log main --oneline | head -1`
 3. **Search codebase** for existing implementations (zero duplication policy):
    ```bash
-   rg "def evaluate_" src/assay/evaluators/
-   find src/assay -name "*.py" -exec grep -l "class.*Reporter" {} +
+   rg "def evaluate_" src/panner-ai/evaluators/
+   find src/panner-ai -name "*.py" -exec grep -l "class.*Reporter" {} +
    ```
 4. **Update issue label:** `status:backlog` → `status:in-progress` (if applicable)
 5. **Create feature branch:** `git checkout -b feature/ISSUE-description`
@@ -201,7 +201,7 @@ def sample_suite_config():
 
 - Keep scope small: **Max 5 files per PR** (excludes lockfiles, .sln, .csproj, generated files)
 - Build frequently: `dotnet build FlowLedger.sln /p:TreatWarningsAsErrors=true` (or Python equivalent)
-- Run tests: `pytest tests/ --cov=src/assay`
+- Run tests: `pytest tests/ --cov=src/panner-ai`
 - Update CHANGELOG.md with your changes
 
 ### Submitting PR
@@ -267,7 +267,7 @@ Assay uses semantic versioning: **MAJOR.MINOR.PATCH**
    ```bash
    pip install build twine
    python -m build
-   twine upload dist/assay-0.2.0-py3-none-any.whl
+   twine upload dist/panner-ai-0.2.0-py3-none-any.whl
    ```
 
 ## Troubleshooting
@@ -304,8 +304,8 @@ except ImportError:
 
 ## Questions?
 
-- Open a GitHub Issue: [Issues](https://github.com/CraftedWithIntent/assay/issues)
-- Start a Discussion: [Discussions](https://github.com/CraftedWithIntent/assay/discussions)
+- Open a GitHub Issue: [Issues](https://github.com/CraftedWithIntent/panner-ai/issues)
+- Start a Discussion: [Discussions](https://github.com/CraftedWithIntent/panner-ai/discussions)
 - Review architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ---

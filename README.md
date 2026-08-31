@@ -181,7 +181,7 @@ Full YAML schema: [docs/domain/suite-schema.md](docs/domain/suite-schema.md)
 ### Run test suite locally
 
 ```bash
-pytest tests/ -v --cov=src/assay --cov-report=term-missing
+pytest tests/ -v --cov=src/panner-ai --cov-report=term-missing
 ```
 
 ### Coverage target
@@ -190,9 +190,9 @@ Minimum 80% (enforced by CI/CD)
 
 ### Add new evaluator
 
-1. Implement pure function in `src/assay/evaluators/`
+1. Implement pure function in `src/panner-ai/evaluators/`
 2. Add test cases in `tests/test_evaluators.py`
-3. Register in `src/assay/core/pipeline.py`
+3. Register in `src/panner-ai/core/pipeline.py`
 4. Update CHANGELOG.md + docs/ARCHITECTURE.md
 
 ## Contributing
@@ -250,8 +250,8 @@ MIT License — See [LICENSE](LICENSE)
 
 ## Support
 
-- Issues: [GitHub Issues](https://github.com/CraftedWithIntent/assay/issues)
-- Discussions: [GitHub Discussions](https://github.com/CraftedWithIntent/assay/discussions)
+- Issues: [GitHub Issues](https://github.com/CraftedWithIntent/panner-ai/issues)
+- Discussions: [GitHub Discussions](https://github.com/CraftedWithIntent/panner-ai/discussions)
 - Documentation: [docs/](docs/)
 
 ---

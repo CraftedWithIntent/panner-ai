@@ -1,4 +1,4 @@
-name: Assay
+name: Panner-AI
 description: Precision testing for AI agents
 author: CraftedWithIntent
 branding:
@@ -17,7 +17,7 @@ runs:
     - uses: actions/setup-python@v4
       with:
         python-version: "3.11"
-    - run: pip install assay-cli
+    - run: pip install panner-ai
       shell: bash
-    - run: assay run -c "${{ inputs.config }}"
+    - run: panner-ai run -c "${{ inputs.config }}"
       shell: bash

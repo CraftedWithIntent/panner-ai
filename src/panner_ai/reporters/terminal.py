@@ -3,8 +3,8 @@
 from rich.console import Console
 from rich.table import Table
 
-from assay.executor.executor import SuiteReport
-from assay.reporters.base import Reporter, ReporterConfig
+from panner_ai.executor.executor import SuiteReport
+from panner_ai.reporters.base import Reporter, ReporterConfig
 
 
 class TerminalReporter(Reporter):

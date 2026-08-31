@@ -4,8 +4,8 @@ import tempfile
 import pytest
 from pydantic import ValidationError as PydanticValidationError
 
-from assay.config.parser import ConfigParseError, SuiteConfig, parse_suite
-from assay.domain.types import AssertionType
+from panner_ai.config.parser import ConfigParseError, SuiteConfig, parse_suite
+from panner_ai.domain.types import AssertionType
 
 
 @pytest.fixture

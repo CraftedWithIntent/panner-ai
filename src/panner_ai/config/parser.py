@@ -6,7 +6,7 @@ import yaml
 from pydantic import BaseModel, field_validator
 from pydantic import ValidationError as PydanticValidationError
 
-from assay.domain.types import AssertionType
+from panner_ai.domain.types import AssertionType
 
 
 class ConfigParseError(Exception):

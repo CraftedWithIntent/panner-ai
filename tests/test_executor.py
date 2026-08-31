@@ -6,8 +6,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import httpx
 import pytest
 
-from assay.config.parser import SuiteConfig, TestCaseSpec
-from assay.executor.executor import (
+from panner_ai.config.parser import SuiteConfig, TestCaseSpec
+from panner_ai.executor.executor import (
     AgentResponse,
     TestExecutor,
 )

@@ -2,7 +2,7 @@
 
 __version__ = "0.1.0"
 
-from assay.domain.types import (
+from panner_ai.domain.types import (
     AgentResponse,
     AssertionSpec,
     AssertionType,

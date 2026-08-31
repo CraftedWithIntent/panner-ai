@@ -2,13 +2,13 @@
 
 import pytest
 
-from assay.core.evaluators import (
+from panner_ai.core.evaluators import (
     evaluate_json_schema,
     evaluate_latency,
     evaluate_regex,
     evaluate_status_code,
 )
-from assay.domain.types import (
+from panner_ai.domain.types import (
     AgentResponse,
     AssertionSpec,
     AssertionType,

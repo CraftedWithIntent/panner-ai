@@ -1,16 +1,16 @@
-"""Typer CLI entrypoint for Assay."""
+"""Typer CLI entrypoint for Panner-AI."""
 
 import asyncio
 from pathlib import Path
 
 import typer
 
-from assay.config.parser import parse_suite
-from assay.executor.executor import TestExecutor
-from assay.reporters import JSONReporter, JUnitReporter, ReporterConfig, TerminalReporter
+from panner_ai.config.parser import parse_suite
+from panner_ai.executor.executor import TestExecutor
+from panner_ai.reporters import JSONReporter, JUnitReporter, ReporterConfig, TerminalReporter
 
 app = typer.Typer(
-    name="assay",
+    name="panner-ai",
     help="Precision testing tool for AI agents",
     no_args_is_help=True,
 )
@@ -114,8 +114,8 @@ def run(
 
 @app.command()
 def version() -> None:
-    """Display Assay version."""
-    typer.echo("assay 0.1.0")
+    """Display Panner-AI version."""
+    typer.echo("panner-ai 0.1.0")
 
 
 if __name__ == "__main__":

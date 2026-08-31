@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from assay.executor.executor import SuiteReport
+from panner_ai.executor.executor import SuiteReport
 
 
 @dataclass(frozen=True)

@@ -1,6 +1,6 @@
 """Baseline tracking package."""
 
-from assay.baseline.tracker import BaselineTracker
+from panner_ai.baseline.tracker import BaselineTracker
 
 __all__ = [
     "BaselineTracker",

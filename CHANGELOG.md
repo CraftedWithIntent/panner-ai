@@ -44,7 +44,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Version-aware datetime.UTC import for Python 3.11+ compatibility
 
 - **M1.6: CLI & Multi-Format Reporters** — Command-line interface and report generation
-  - `assay run` CLI command with Typer framework
+  - `panner-ai run` CLI command with Typer framework
   - Reporter pattern: Abstract base class + 3 concrete implementations
   - `TerminalReporter` — ANSI colored output via Rich library (tables, summary stats)
   - `JUnitReporter` — JUnit XML format for GitHub Actions and Jenkins integration
@@ -55,7 +55,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Configuration options: `--config`, `--reporter`, `--output`, `--baseline-file`
 
 - **M1.7: GitHub Actions CI/CD Integration** — Automated testing in GitHub workflows
-  - `.github/workflows/assay.yml` workflow with 2-stage pipeline
+  - `.github/workflows/panner-ai.yml` workflow with 2-stage pipeline
   - `smoke-tests` job: Fast baseline validation (2 tests, <1 minute, gates regression)
   - `regression-tests` job: Full suite (8 tests, ~5 minutes, comprehensive coverage)
   - Artifact upload: 90-day retention for test reports and telemetry
