@@ -12,6 +12,9 @@ Testing AI agents is hard. Traditional test assertions (status codes, latency) c
 
 ## Quick Start
 
+![panner-ai Hero](https://raw.githubusercontent.com/CraftedWithIntent/panner-ai/main/demo/hero.png)
+
+
 ### Install
 
 ```bash
