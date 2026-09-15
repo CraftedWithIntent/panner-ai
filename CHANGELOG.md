@@ -4,6 +4,21 @@ All notable changes to Panner AI are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2026-09-15
+
+### Added
+
+- **PyPI-Optimized README** — Condensed version for PyPI users
+  - 50% shorter than main README (6.5KB vs 12.9KB)
+  - Focus on Quick Start and key features
+  - Better mobile rendering on PyPI.org
+  - Full documentation available on GitHub
+
+### Changed
+
+- Updated `pyproject.toml` to use `README-PYPI.md` for PyPI rendering
+- Main README.md remains on GitHub for comprehensive developer documentation
+
 ## [0.1.3] - 2026-08-31
 
 ### Added

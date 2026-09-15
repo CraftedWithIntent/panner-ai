@@ -3,4 +3,5 @@ WORKDIR /app
 COPY pyproject.toml ./
 RUN pip install -e .
 COPY src ./src
+LABEL version="0.1.4" description="Precision testing tool for AI agents"
 ENTRYPOINT ["assay"]
